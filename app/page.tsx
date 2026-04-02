@@ -1,4 +1,3 @@
-import { Navigation } from "./components/Navigation";
 import { AnimateOnScroll } from "./components/AnimateOnScroll";
 import { GithubLogo, ArrowUpRight } from "./components/Icons";
 import { CopyEmail } from "./components/CopyEmail";
@@ -171,7 +170,6 @@ function SectionHeader({
 export default function Home() {
   return (
     <>
-      <Navigation />
 
       {/* ═══ HERO ═══ */}
       <section className="min-h-[100dvh] flex items-center relative">
