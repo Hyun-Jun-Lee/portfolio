@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const sections = ["about", "skills", "projects", "experience", "contact"];
+const sections = ["introduce", "projects", "experience"];
 
 export function Navigation() {
   const [activeSection, setActiveSection] = useState("");
@@ -49,12 +49,7 @@ export function Navigation() {
       }`}
     >
       <div className="max-w-[1200px] mx-auto px-6 md:px-8 h-14 flex items-center justify-between">
-        <a
-          href="#"
-          className="font-mono text-xs text-dim uppercase tracking-[0.1em] hover:text-foreground transition-colors duration-150"
-        >
-          HJ&mdash;2026
-        </a>
+        <div />
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-1">

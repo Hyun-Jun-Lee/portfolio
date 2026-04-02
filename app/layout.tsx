@@ -14,14 +14,6 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "이현준 | Product Engineer",
-  description:
-    "Product Engineer 이현준의 포트폴리오. FastAPI, LangChain, Django, AWS 기반의 백엔드 및 AI 시스템 개발.",
-  openGraph: {
-    title: "이현준 | Product Engineer",
-    description:
-      "Product Engineer 이현준의 포트폴리오. FastAPI, LangChain, Django, AWS 기반의 백엔드 및 AI 시스템 개발.",
-    type: "website",
-  },
 };
 
 export default function RootLayout({

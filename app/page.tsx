@@ -1,25 +1,7 @@
 import { Navigation } from "./components/Navigation";
 import { AnimateOnScroll } from "./components/AnimateOnScroll";
 import { GithubLogo, ArrowUpRight } from "./components/Icons";
-
-const skillCategories = [
-  {
-    name: "Backend",
-    skills: ["FastAPI", "Django", "LangChain", "LangGraph"],
-  },
-  {
-    name: "Infrastructure",
-    skills: ["AWS", "Docker", "Nginx"],
-  },
-  {
-    name: "Database",
-    skills: ["MySQL", "PostgreSQL", "MongoDB", "Redis"],
-  },
-  {
-    name: "Data Engineering",
-    skills: ["Prefect", "Airflow"],
-  },
-];
+import { CopyEmail } from "./components/CopyEmail";
 
 const projects = [
   {
@@ -29,8 +11,12 @@ const projects = [
     role: "Fullstack",
     description: "MMA 경기 데이터 수집 · 분석 · AI 챗봇 플랫폼",
     highlights: [
-      "자연어 → SQL 자동 변환 AI 챗봇 구현 (LangChain/LangGraph 기반 2-Phase ReAct 에이전트)",
+      "LangGraph 기반 Supervisor Multi-Agent 아키텍처 설계",
+      "  Send() 기반 동적 라우팅 및 에이전트 병렬 실행",
+      "  멀티턴 대화 및 히스토리 압축 구현",
       "역할별 AI 에이전트 분리 및 컨텍스트 문서 체계화로 AI-Assisted 개발 프로세스 구축",
+      "  코드 컨벤션 및 디자인 시스템 문서화로 AI 코드 생성 정확도 향상",
+      "  테스트 코드 · commit · tag · 문서 업데이트 등 전문 에이전트 구성으로 반복 작업 자동화",
       "Prefect 워크플로우 오케스트레이션으로 주간 자동 데이터 수집 파이프라인 구축",
       "Blue/Green 무중단 배포 구성으로 prod 환경 서비스 안정성 확보",
     ],
@@ -170,7 +156,7 @@ function SectionHeader({
   return (
     <AnimateOnScroll>
       <div className="flex items-baseline gap-4">
-        <span className="font-mono text-xs text-accent uppercase tracking-[0.1em]">
+        <span className="font-mono text-sm text-accent uppercase tracking-[0.1em]">
           {number}
         </span>
         <h2 className="text-[clamp(2rem,5vw,4rem)] font-black uppercase tracking-[-0.04em] leading-none">
@@ -190,226 +176,136 @@ export default function Home() {
       {/* ═══ HERO ═══ */}
       <section className="min-h-[100dvh] flex items-center relative">
         <div className="max-w-[1200px] mx-auto px-6 md:px-8 w-full pt-16">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-20 items-start">
-            {/* Left: Main typography */}
-            <div>
-              <div
-                className="reveal-on-load"
-                style={{ animationDelay: "0ms" }}
-              >
-                <span className="font-mono text-xs text-accent uppercase tracking-[0.1em]">
-                  /// DESIGNATION
-                </span>
-              </div>
-
-              <div
-                className="reveal-on-load"
-                style={{ animationDelay: "100ms" }}
-              >
-                <h1 className="text-[clamp(3rem,8vw,8rem)] font-black uppercase tracking-[-0.04em] leading-[0.9] mt-4 text-foreground">
-                  PRODUCT
-                  <br />
-                  ENGINEER
-                </h1>
-              </div>
-
-              <div
-                className="reveal-on-load"
-                style={{ animationDelay: "200ms" }}
-              >
-                <div className="border-t-2 border-border-subtle mt-6 pt-6">
-                  <p className="text-[clamp(1.5rem,3vw,2.5rem)] font-black uppercase tracking-[-0.03em] leading-[0.95]">
-                    이현준
-                  </p>
-                </div>
-              </div>
-
-              <div
-                className="reveal-on-load"
-                style={{ animationDelay: "300ms" }}
-              >
-                <p className="text-sm text-muted leading-relaxed max-w-[50ch] mt-6">
-                  &quot;정답&quot;을 찾기보다 &quot;더 나은 해결책&quot;을 찾는
-                  개발자. 주어진 문제 상황에서 최적의 기술을 판단하고 빠르게
-                  습득하여 적용합니다.
-                </p>
-              </div>
-
-              <div
-                className="reveal-on-load flex items-center gap-4 mt-8"
-                style={{ animationDelay: "400ms" }}
-              >
-                <a
-                  href="https://github.com/Hyun-Jun-Lee"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-foreground text-background font-mono text-xs uppercase tracking-[0.05em] px-5 py-3 hover:bg-accent hover:text-foreground transition-colors duration-150 active:scale-[0.98]"
-                >
-                  <GithubLogo size={14} weight="bold" />
-                  GITHUB &gt;&gt;&gt;
-                </a>
-
-                <a
-                  href="mailto:bhk0827@gmail.com"
-                  className="inline-flex items-center gap-2 text-muted font-mono text-xs uppercase tracking-[0.05em] border-2 border-border-subtle px-5 py-3 hover:text-foreground hover:border-foreground transition-colors duration-150 active:scale-[0.98]"
-                >
-                  CONTACT &gt;&gt;&gt;
-                </a>
+          <div className="flex flex-col items-center text-center">
+            <div
+              className="reveal-on-load relative z-[51]"
+              style={{ animationDelay: "100ms" }}
+            >
+              <div className="border-2 border-border-subtle overflow-hidden w-[240px] md:w-[320px]">
+                <img
+                  src="/profile.jpg"
+                  alt="이현준"
+                  className="w-full h-auto object-cover"
+                />
               </div>
             </div>
 
-            {/* Right: Technical metadata panel */}
             <div
-              className="hidden lg:block reveal-on-load"
-              style={{ animationDelay: "300ms" }}
+              className="reveal-on-load mt-8"
+              style={{ animationDelay: "200ms" }}
             >
-              <div className="border-2 border-border-subtle">
-                <div className="border-b border-border-subtle px-6 py-3">
-                  <span className="font-mono text-xs text-accent uppercase tracking-[0.1em]">
-                    // SYSTEM.STATUS
-                  </span>
-                </div>
-                <div className="px-6 py-5">
-                  <dl className="font-mono text-xs space-y-3 uppercase tracking-[0.05em]">
-                    <div className="flex justify-between">
-                      <dt className="text-dim">LOCATION</dt>
-                      <dd className="text-foreground">SEOUL, KR</dd>
-                    </div>
-                    <div className="flex justify-between">
-                      <dt className="text-dim">STATUS</dt>
-                      <dd className="text-terminal-green">AVAILABLE</dd>
-                    </div>
-                    <div className="border-t border-border-subtle my-1" />
-                    <div className="flex justify-between">
-                      <dt className="text-dim">STACK</dt>
-                      <dd className="text-foreground">FASTAPI</dd>
-                    </div>
-                    <div className="flex justify-between">
-                      <dt className="text-dim" />
-                      <dd className="text-foreground">LANGCHAIN</dd>
-                    </div>
-                    <div className="flex justify-between">
-                      <dt className="text-dim" />
-                      <dd className="text-foreground">LANGGRAPH</dd>
-                    </div>
-                    <div className="flex justify-between">
-                      <dt className="text-dim" />
-                      <dd className="text-foreground">DOCKER</dd>
-                    </div>
-                    <div className="flex justify-between">
-                      <dt className="text-dim" />
-                      <dd className="text-foreground">POSTGRESQL</dd>
-                    </div>
-                    <div className="border-t border-border-subtle my-1" />
-                    <div className="flex justify-between">
-                      <dt className="text-dim">MAIL</dt>
-                      <dd className="text-foreground">BHK0827@GMAIL.COM</dd>
-                    </div>
-                    <div className="flex justify-between">
-                      <dt className="text-dim">REF</dt>
-                      <dd className="text-dim">HJ&mdash;2026 / REV 1.0</dd>
-                    </div>
-                  </dl>
-                </div>
-              </div>
+              <h1 className="flex flex-col items-center gap-4">
+                <span className="text-[clamp(2rem,5vw,4rem)] font-black uppercase tracking-[-0.04em] leading-[0.9] text-foreground">
+                  이현준
+                </span>
+                <span className="text-[clamp(1.2rem,3vw,2.2rem)] font-normal uppercase tracking-[-0.03em] leading-[0.95] text-accent">
+                  PRODUCT ENGINEER
+                </span>
+              </h1>
+            </div>
+
+            <div
+              className="reveal-on-load flex flex-col items-center gap-3 mt-8"
+              style={{ animationDelay: "400ms" }}
+            >
+              <a
+                href="https://github.com/Hyun-Jun-Lee"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-muted font-mono text-lg tracking-[0.02em] hover:text-foreground transition-colors duration-150"
+              >
+                <GithubLogo size={16} weight="bold" />
+                github.com/Hyun-Jun-Lee
+              </a>
+              <CopyEmail email="bhk0827@gmail.com" />
+              <span className="text-base text-dim">
+                새로운 기회나 협업에 열려 있습니다. 편하게 연락주세요.
+              </span>
             </div>
           </div>
         </div>
       </section>
 
       {/* ═══ ABOUT ═══ */}
-      <section id="about" className="py-24 md:py-32">
+      <section id="introduce" className="py-24 md:py-32">
         <div className="max-w-[1200px] mx-auto px-6 md:px-8">
-          <SectionHeader number="01" title="ABOUT" />
+          <SectionHeader number="01" title="INTRODUCE" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12 lg:gap-20 mt-10">
-            <AnimateOnScroll delay={100}>
-              <p className="text-sm text-muted leading-relaxed max-w-[65ch]">
-                저는 &quot;정답&quot;을 찾기보다 &quot;더 나은 해결책&quot;을
-                찾는 개발자가 되고자 합니다. 특정 접근 방식이나 기술에 고착되는
-                것은 기술이 빠르게 발전하는 현재 환경에 맞지 않다고 생각합니다.
+          <AnimateOnScroll delay={100}>
+            <div className="max-w-[65ch] mt-10">
+              <p className="text-base text-muted leading-relaxed">
+                저는 기능을 구현하는 것보다 문제를 해결하는 것에 더 관심이
+                있습니다.
+                <br />
+                여러 아이디어를 직접 서비스로 만들고 운영해온 경험을 통해
+                <br />
+                개발자란 결국 문제를 발견하고 해결하는 사람이라는 걸 알게
+                됐습니다.
+                <br />
+                그래서 지금도 구현 방법보다 &quot;무엇을 만들어야
+                하는가&quot;를 먼저 고민합니다.
+                <br />
+                앞으로도 좋은 코드보다 좋은 프로덕트를 만드는 엔지니어이고
+                싶습니다.
               </p>
-              <p className="text-sm text-muted leading-relaxed max-w-[65ch] mt-4">
-                완벽한 기술 스택을 갖추는 것보다 중요한 것은, 주어진 문제
-                상황에서 최적의 기술을 판단하고 이를 빠르게 습득하여 적용하는
-                능력이라고 믿습니다.
-              </p>
+            </div>
+          </AnimateOnScroll>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
+            <AnimateOnScroll delay={200}>
+              <div className="border border-border-subtle bg-[hsl(var(--background))]/60 p-6 h-full">
+                <h3 className="text-base font-black tracking-[-0.02em]">
+                  Data to Insight
+                </h3>
+                <p className="text-base text-muted leading-relaxed mt-4">
+                  크롤링 · 파이프라인 · LLM 분석 · 시각화까지
+                  <br />
+                  데이터의 수집부터 사용자 경험까지 설계
+                </p>
+              </div>
             </AnimateOnScroll>
 
-            <AnimateOnScroll delay={200}>
-              <div className="border-2 border-border-subtle">
-                <div className="px-6 py-5">
-                  <samp className="font-mono text-xs text-accent uppercase tracking-[0.1em]">
-                    // CERTIFICATES
-                  </samp>
-                  <dl className="mt-3 space-y-2">
-                    <div className="flex justify-between items-baseline">
-                      <dt className="text-sm text-foreground">정보처리기사</dt>
-                      <dd className="font-mono text-xs text-dim">2020.08</dd>
-                    </div>
-                    <div className="flex justify-between items-baseline">
-                      <dt className="text-sm text-foreground">
-                        ADsP (데이터분석준전문가)
-                      </dt>
-                      <dd className="font-mono text-xs text-dim">2019.12</dd>
-                    </div>
-                    <div className="flex justify-between items-baseline">
-                      <dt className="text-sm text-foreground">
-                        AFPK (재무설계사)
-                      </dt>
-                      <dd className="font-mono text-xs text-dim">2017.03</dd>
-                    </div>
-                  </dl>
-                </div>
+            <AnimateOnScroll delay={260}>
+              <div className="border border-border-subtle bg-[hsl(var(--background))]/60 p-6 h-full">
+                <h3 className="text-base font-black tracking-[-0.02em]">
+                  Product Ownership
+                </h3>
+                <p className="text-base text-muted leading-relaxed mt-4">
+                  아이디어 기획부터 배포 · 운영까지
+                  <br />
+                  혼자 완성한 프로덕션 서비스 다수 보유
+                </p>
+              </div>
+            </AnimateOnScroll>
+
+            <AnimateOnScroll delay={320}>
+              <div className="border border-border-subtle bg-[hsl(var(--background))]/60 p-6 h-full">
+                <h3 className="text-base font-black tracking-[-0.02em]">
+                  Startup DNA
+                </h3>
+                <p className="text-base text-muted leading-relaxed mt-4">
+                  5인 ~ 30인 규모 스타트업에서
+                  <br />
+                  기획 · 개발 · 배포 · 운영까지
+                  <br />
+                  End-to-End 오너십 경험
+                </p>
               </div>
             </AnimateOnScroll>
           </div>
         </div>
       </section>
 
-      {/* ═══ SKILLS ═══ */}
-      <section id="skills" className="py-24 md:py-32">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-8">
-          <SectionHeader number="02" title="SKILLS" />
-
-          <AnimateOnScroll delay={100}>
-            <div className="bg-border-subtle grid grid-cols-1 md:grid-cols-2 gap-[1px] mt-10 border border-border-subtle">
-              {skillCategories.map((category) => (
-                <div
-                  key={category.name}
-                  className="bg-background p-6 md:p-8"
-                >
-                  <samp className="font-mono text-xs text-accent uppercase tracking-[0.1em]">
-                    // {category.name}
-                  </samp>
-                  <div className="flex flex-wrap gap-x-6 gap-y-2 mt-4">
-                    {category.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="font-mono text-sm text-foreground uppercase tracking-[0.03em]"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </AnimateOnScroll>
-        </div>
-      </section>
-
       {/* ═══ PROJECTS ═══ */}
       <section id="projects" className="py-24 md:py-32">
         <div className="max-w-[1200px] mx-auto px-6 md:px-8">
-          <SectionHeader number="03" title="PROJECTS" />
+          <SectionHeader number="02" title="PROJECTS" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
+          <div className="grid grid-cols-1 gap-4 mt-10">
             {projects.map((project, index) => (
               <AnimateOnScroll
                 key={project.name}
                 delay={index * 60}
-                className={project.featured ? "md:col-span-2" : ""}
               >
                 <div className="border-2 border-border-subtle p-6 md:p-8 hover:border-foreground transition-colors duration-150 h-full">
                   {/* Header */}
@@ -418,64 +314,63 @@ export default function Home() {
                       <h3 className="text-lg font-black uppercase tracking-[-0.02em]">
                         {project.name}
                       </h3>
-                      <div className="flex items-center gap-3 mt-1 font-mono text-xs text-dim uppercase tracking-[0.05em]">
-                        <span>{project.type}</span>
-                        <span>/</span>
-                        <span>{project.role}</span>
-                      </div>
+                      {(project.website || project.github) && (
+                        <div className="flex items-center gap-4 mt-2">
+                          {project.github && (
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 font-mono text-sm text-dim uppercase tracking-[0.05em] hover:text-foreground transition-colors duration-150"
+                            >
+                              <GithubLogo size={14} weight="bold" />
+                              GITHUB
+                            </a>
+                          )}
+                          {project.website && (
+                            <a
+                              href={project.website}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 font-mono text-sm text-dim uppercase tracking-[0.05em] hover:text-foreground transition-colors duration-150"
+                            >
+                              VISIT
+                              <ArrowUpRight size={12} weight="bold" />
+                            </a>
+                          )}
+                        </div>
+                      )}
                     </div>
-                    <span className="font-mono text-xs text-dim shrink-0 uppercase tracking-[0.05em]">
+                    <span className="font-mono text-sm text-dim shrink-0 uppercase tracking-[0.05em]">
                       {project.period}
                     </span>
                   </div>
 
                   {/* Description */}
                   <div className="border-t border-border-subtle mt-4 pt-4">
-                    <p className="text-sm text-muted">
+                    <p className="text-base text-muted">
                       {project.description}
                     </p>
 
                     {/* Highlights */}
                     <ul className="mt-3 space-y-1.5">
-                      {project.highlights.map((highlight, i) => (
-                        <li
-                          key={i}
-                          className="text-sm text-zinc-400 leading-relaxed"
-                        >
-                          <span className="text-accent mr-2">&rsaquo;</span>
-                          {highlight}
-                        </li>
-                      ))}
+                      {project.highlights.map((highlight, i) => {
+                        const isSub = highlight.startsWith("  ");
+                        const text = isSub ? highlight.trimStart() : highlight;
+                        return (
+                          <li
+                            key={i}
+                            className={`text-base text-muted leading-relaxed${isSub ? " pl-5" : ""}`}
+                          >
+                            <span className="text-accent mr-2">
+                              {isSub ? "–" : "\u203A"}
+                            </span>
+                            {text}
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
-
-                  {/* Links */}
-                  {(project.website || project.github) && (
-                    <div className="flex items-center gap-4 mt-4 pt-4 border-t border-border-subtle">
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 font-mono text-xs text-dim uppercase tracking-[0.05em] hover:text-foreground transition-colors duration-150"
-                        >
-                          <GithubLogo size={14} weight="bold" />
-                          GITHUB
-                        </a>
-                      )}
-                      {project.website && (
-                        <a
-                          href={project.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 font-mono text-xs text-dim uppercase tracking-[0.05em] hover:text-foreground transition-colors duration-150"
-                        >
-                          VISIT
-                          <ArrowUpRight size={12} weight="bold" />
-                        </a>
-                      )}
-                    </div>
-                  )}
                 </div>
               </AnimateOnScroll>
             ))}
@@ -486,7 +381,7 @@ export default function Home() {
       {/* ═══ EXPERIENCE ═══ */}
       <section id="experience" className="py-24 md:py-32">
         <div className="max-w-[1200px] mx-auto px-6 md:px-8">
-          <SectionHeader number="04" title="EXPERIENCE" />
+          <SectionHeader number="03" title="EXPERIENCE" />
 
           <div className="mt-10">
             {experiences.map((exp, index) => (
@@ -494,7 +389,7 @@ export default function Home() {
                 <div className="border-t-2 border-border-subtle py-8 grid grid-cols-1 md:grid-cols-[180px_1fr] gap-4 md:gap-8">
                   {/* Left: Period */}
                   <div>
-                    <span className="font-mono text-xs text-dim uppercase tracking-[0.05em]">
+                    <span className="font-mono text-sm text-dim uppercase tracking-[0.05em]">
                       {exp.period}
                     </span>
                   </div>
@@ -505,11 +400,11 @@ export default function Home() {
                       {exp.company}
                     </h3>
                     <div className="flex items-center gap-2 mt-1">
-                      <span className="font-mono text-xs text-accent uppercase tracking-[0.05em]">
+                      <span className="font-mono text-sm text-accent uppercase tracking-[0.05em]">
                         {exp.role}
                       </span>
                       <span className="text-dim">&mdash;</span>
-                      <span className="text-sm text-muted">
+                      <span className="text-base text-muted">
                         {exp.description}
                       </span>
                     </div>
@@ -518,7 +413,7 @@ export default function Home() {
                       {exp.highlights.map((highlight, i) => (
                         <li
                           key={i}
-                          className="text-sm text-zinc-400 leading-relaxed"
+                          className="text-base text-muted leading-relaxed"
                         >
                           <span className="text-accent mr-2">&rsaquo;</span>
                           {highlight}
@@ -534,49 +429,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ CONTACT ═══ */}
-      <section id="contact" className="py-24 md:py-32">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-8">
-          <SectionHeader number="05" title="CONTACT" />
 
-          <AnimateOnScroll delay={100}>
-            <p className="text-sm text-muted leading-relaxed max-w-[50ch] mt-10">
-              새로운 기회나 협업에 열려 있습니다. 편하게 연락해주세요.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 mt-8">
-              <a
-                href="mailto:bhk0827@gmail.com"
-                className="inline-flex items-center gap-2 bg-foreground text-background font-mono text-xs uppercase tracking-[0.05em] px-5 py-3 hover:bg-accent hover:text-foreground transition-colors duration-150 active:scale-[0.98]"
-              >
-                BHK0827@GMAIL.COM &gt;&gt;&gt;
-              </a>
-
-              <a
-                href="https://github.com/Hyun-Jun-Lee"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-muted font-mono text-xs uppercase tracking-[0.05em] border-2 border-border-subtle px-5 py-3 hover:text-foreground hover:border-foreground transition-colors duration-150 active:scale-[0.98]"
-              >
-                <GithubLogo size={14} weight="bold" />
-                GITHUB &gt;&gt;&gt;
-              </a>
-            </div>
-          </AnimateOnScroll>
-        </div>
-      </section>
-
-      {/* ═══ FOOTER ═══ */}
-      <footer className="border-t-2 border-border-subtle py-6">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <span className="font-mono text-xs text-dim uppercase tracking-[0.05em]">
-            HJ&mdash;2026 / REV 1.0
-          </span>
-          <span className="font-mono text-xs text-dim uppercase tracking-[0.05em]">
-            BUILT WITH NEXT.JS
-          </span>
-        </div>
-      </footer>
     </>
   );
 }
