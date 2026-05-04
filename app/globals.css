@@ -1,17 +1,39 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #0a0a0a;
-  --color-foreground: #eaeaea;
-  --color-surface: #111111;
-  --color-border-subtle: #333333;
-  --color-muted: #666666;
-  --color-dim: #444444;
-  --color-accent: #e61919;
-  --color-accent-soft: rgba(230, 25, 25, 0.08);
-  --color-terminal-green: #4af626;
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* ── Spotify Design Tokens ── */
+  --color-green: #1ed760;
+  --color-green-active: #1fdf64;
+  --color-green-border: #1db954;
+  --color-near-black: #121212;
+  --color-surface: #181818;
+  --color-surface-mid: #1f1f1f;
+  --color-surface-elevated: #252525;
+  --color-surface-alt: #272727;
+  --color-white: #ffffff;
+  --color-silver: #b3b3b3;
+  --color-near-white: #cbcbcb;
+  --color-border-gray: #4d4d4d;
+  --color-light-border: #7c7c7c;
+  --color-on-green: #000000;
+  --color-negative: #f3727f;
+  --color-green-soft: rgba(30, 215, 96, 0.08);
+  --color-green-border-soft: rgba(30, 215, 96, 0.15);
+
+  /* ── Shadows ── */
+  --shadow-medium: 0px 8px 8px rgba(0, 0, 0, 0.3);
+  --shadow-heavy: 0px 8px 24px rgba(0, 0, 0, 0.5);
+
+  /* ── Radius ── */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-pill: 500px;
+  --radius-full: 9999px;
+
+  /* ── Fonts ── */
+  --font-sans: var(--font-plus-jakarta-sans);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 html {
@@ -19,45 +41,31 @@ html {
 }
 
 body {
-  background: var(--color-background);
-  color: var(--color-foreground);
+  background: var(--color-near-black);
+  color: var(--color-white);
   word-break: keep-all;
   overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: rgba(230, 25, 25, 0.3);
-  color: #eaeaea;
+  background: rgba(30, 215, 96, 0.3);
+  color: var(--color-white);
 }
 
-/* Hero entrance — mechanical timing */
+/* Hero entrance — MOTION_INTENSITY 6 */
 .reveal-on-load {
   opacity: 0;
-  animation: reveal 400ms cubic-bezier(0.05, 0.7, 0.1, 1) both;
+  animation: reveal 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes reveal {
   from {
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* CRT Scanlines overlay */
-.scanlines {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.06) 2px,
-    rgba(0, 0, 0, 0.06) 4px
-  );
 }

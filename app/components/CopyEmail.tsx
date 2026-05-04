@@ -15,7 +15,7 @@ export function CopyEmail({ email }: { email: string }) {
   return (
     <button
       onClick={handleCopy}
-      className="inline-flex items-center gap-2 text-muted font-mono text-lg tracking-[0.02em] hover:text-foreground transition-colors duration-150 cursor-pointer"
+      className="inline-flex items-center gap-2 text-silver font-mono text-sm tracking-[0.02em] hover:text-white transition-colors duration-150 cursor-pointer"
     >
       <EnvelopeSimple size={16} weight="bold" />
       {copied ? "Copied!" : email}
