@@ -153,28 +153,18 @@ const skills = [
     description:
       "자연어 처리부터 데이터 파이프라인, API 설계까지. LLM을 활용한 프로덕트를 직접 설계하고 운영합니다.",
     tags: ["FastAPI", "Django", "LangChain", "LangGraph", "Python"],
-    span: true,
-  },
-  {
-    label: "Infra",
-    title: "Cloud & DevOps",
-    description: "컨테이너 기반 배포와 CI/CD 파이프라인",
-    tags: ["AWS", "Docker", "Nginx"],
-    span: false,
   },
   {
     label: "Data",
     title: "DB & Pipeline",
     description: "워크플로우 오케스트레이션과 데이터 저장소 설계",
     tags: ["PostgreSQL", "MongoDB", "Redis", "Prefect"],
-    span: false,
   },
   {
     label: "Strength",
     title: "Product Ownership",
     description: "기획부터 배포, 운영까지 End-to-End 프로덕트 오너십",
     tags: [],
-    span: false,
   },
 ];
 
@@ -294,13 +284,9 @@ export default function Home() {
         <div className="max-w-[1200px] mx-auto px-5 md:px-10">
           <SectionHeader title="Skills" />
 
-          <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr] gap-3 md:auto-rows-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {skills.map((skill, i) => (
-              <AnimateOnScroll
-                key={skill.title}
-                delay={i * 60}
-                className={skill.span ? "md:row-span-2" : ""}
-              >
+              <AnimateOnScroll key={skill.title} delay={i * 60}>
                 <div className="bg-surface rounded-lg p-6 h-full hover:bg-surface-mid transition-colors duration-150">
                   <span className="text-xs font-bold text-green uppercase tracking-[1.4px]">
                     {skill.label}
@@ -349,17 +335,6 @@ export default function Home() {
                   <div className="flex flex-col gap-2">
                     <span className="font-mono text-[13px] text-silver">
                       {project.period}
-                    </span>
-                    <span
-                      className={`text-[10.5px] font-semibold capitalize tracking-[0.5px] px-2.5 py-0.5 rounded-[2px] w-fit ${
-                        project.type === "Personal"
-                          ? "bg-green text-on-green"
-                          : project.type === "Team"
-                            ? "bg-silver text-near-black"
-                            : "bg-surface-elevated text-white"
-                      }`}
-                    >
-                      {project.type}
                     </span>
                   </div>
 
