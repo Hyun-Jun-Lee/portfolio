@@ -6,12 +6,31 @@ import { CopyEmail } from "./components/CopyEmail";
 
 const projects = [
   {
+    name: "Oracle DB 운영 분석 AI Agent",
+    period: "2026.04 ~",
+    type: "Consulting",
+    role: "AI Engineering Consultant",
+    description:
+      "삼성전자 DS MES팀 에이전트 기반 Oracle 장애 분석 시스템 ",
+    highlights: [
+      "Classifier 기반 라우팅과 Global Health Agent 중심의 Plan-and-Execute Workflow 설계",
+      "전문 개발자가 없는 조직에서 LLM 기반 운영 분석 서비스의 문제 정의, 기능 기획, 시스템 구조 설계를 주도",
+      "고정 테스트셋, 기대 답변, LLM-as-a-judge를 기반으로 에이전트 응답 품질을 회귀 테스트하고 개선하는 평가 체계 설계",
+      "프로젝트 기본 개발 환경과 CI/CD를 구축하고, Celery / RabbitMQ 기반 비동기 worker 아키텍처를 도입",
+      "DBA / SRE가 반복적으로 수행하던 초기 점검 절차를 AI 기반 분석 워크플로우로 전환",
+    ],
+    website: null,
+    github: null,
+    featured: false,
+  },
+  {
     name: "MMA-Savant",
     period: "2025.09 ~",
     type: "Personal",
     role: "Fullstack",
     description: "MMA 경기 데이터 수집 / 분석 / AI 챗봇 플랫폼",
     highlights: [
+      "자연어 질문을 의도 분석, SQL 생성, 실행 결과 해석, 시각화 응답으로 분해한 LLM 기반 분석 에이전트 설계",
       "LangGraph 기반 Supervisor Multi-Agent 아키텍처 설계",
       "역할별 AI 에이전트 분리 및 컨텍스트 문서 체계화로 AI-Assisted 개발 프로세스 구축",
       "Prefect 워크플로우 오케스트레이션으로 주간 자동 데이터 수집 파이프라인 구축",
@@ -120,6 +139,17 @@ const projects = [
 
 const experiences = [
   {
+    company: "삼성전자 DS",
+    role: "AI Engineering Consultant",
+    period: "2026.03 ~",
+    description: "Manufacturing Execution System Team",
+    highlights: [
+      "삼성전자 DS SRE 팀 멀티 에이전트 프로젝트 참여",
+      "비즈니스 요구사항을 제품 구조, 데이터 흐름, AI 활용 전략으로 구체화",
+      "아이디어 검증부터 시스템 설계, 프로토타입 구현, 운영 단계 까지 End-to-End 지원",
+    ],
+  },
+  {
     company: "(주)인사이터",
     role: "Data Engineer",
     period: "2024.06 ~ 2025.12",
@@ -151,14 +181,21 @@ const certificates = [
 const skills = [
   {
     label: "Core",
-    title: "Backend & AI",
+    title: "Product Engineering",
     description:
-      "자연어 처리부터 데이터 파이프라인, API 설계까지. LLM을 활용한 프로덕트를 직접 설계하고 운영합니다.",
+      "아이디어를 사용 가능한 서비스로 만들고, 요구사항 / 데이터 / 운영 제약을 함께 고려해 제품 단위로 완성합니다.",
   },
   {
-    label: "Data",
-    title: "DB & Pipeline",
-    description: "워크플로우 오케스트레이션과 데이터 저장소 설계",
+    label: "AI",
+    title: "AI System Design",
+    description:
+      "LLM을 단순 호출이 아니라 의도 분석, 도구 사용, 검증, 후처리 흐름으로 설계해 제품 기능으로 통합합니다.",
+  },
+  {
+    label: "Operation",
+    title: "Data & Operations",
+    description:
+      "수집, 저장, 검색, 배포, 모니터링까지 제품이 지속적으로 동작하기 위한 데이터 / 운영 구조를 설계합니다.",
   },
   {
     label: "Strength",
@@ -196,7 +233,7 @@ export default function Home() {
               >
                 <div className="inline-flex items-center gap-2 text-xs font-bold text-green tracking-[1.4px] uppercase bg-surface px-3.5 py-1.5 rounded-full w-fit mb-6">
                   <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
-                  Backend & AI Engineer
+                  Product Engineer
                 </div>
               </div>
 
@@ -264,7 +301,7 @@ export default function Home() {
           <div className="max-w-[1200px] mx-auto px-5 md:px-10">
             <SectionHeader title="Skills" />
 
-            <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-3" staggerMs={120}>
+            <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 gap-3" staggerMs={120}>
               {skills.map((skill) => (
                 <div key={skill.title} className="bg-surface rounded-lg p-6 h-full hover:bg-surface-mid transition-colors duration-150">
                   <span className="text-xs font-bold text-green uppercase tracking-[1.4px]">

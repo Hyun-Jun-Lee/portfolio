@@ -14,14 +14,14 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "이현준 | Backend & AI Engineer",
+  title: "이현준 | Product Engineer",
   description:
-    "기획부터 배포까지, LLM 기반 프로덕트를 직접 설계하고 운영하는 Backend & AI 엔지니어입니다.",
+    "기획부터 배포까지, LLM 기반 프로덕트를 직접 설계하고 운영하는 Product Engineer입니다.",
   metadataBase: new URL("https://juniverse.pro"),
   openGraph: {
-    title: "이현준 | Backend & AI Engineer",
+    title: "이현준 | Product Engineer",
     description:
-      "기획부터 배포까지, LLM 기반 프로덕트를 직접 설계하고 운영하는 Backend & AI 엔지니어입니다.",
+      "기획부터 배포까지, LLM 기반 프로덕트를 직접 설계하고 운영하는 Product Engineer입니다.",
     url: "https://juniverse.pro",
     siteName: "이현준 Portfolio",
     locale: "ko_KR",
@@ -30,9 +30,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "이현준 | Backend & AI Engineer",
+    title: "이현준 | Product Engineer",
     description:
-      "기획부터 배포까지, LLM 기반 프로덕트를 직접 설계하고 운영하는 Backend & AI 엔지니어입니다.",
+      "기획부터 배포까지, LLM 기반 프로덕트를 직접 설계하고 운영하는 Product Engineer입니다.",
     images: ["/profile.jpg"],
   },
   robots: { index: true, follow: true },
