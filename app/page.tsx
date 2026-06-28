@@ -144,7 +144,7 @@ const experiences = [
     period: "2026.03 ~",
     description: "Manufacturing Execution System Team",
     highlights: [
-      "삼성전자 DS SRE 팀 멀티 에이전트 프로젝트 참여",
+      "삼성전자 DS MES 팀 멀티 에이전트 프로젝트 참여",
       "비즈니스 요구사항을 제품 구조, 데이터 흐름, AI 활용 전략으로 구체화",
       "아이디어 검증부터 시스템 설계, 프로토타입 구현, 운영 단계 까지 End-to-End 지원",
     ],
