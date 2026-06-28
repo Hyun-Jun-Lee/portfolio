@@ -11,13 +11,13 @@ const projects = [
     type: "Consulting",
     role: "AI Engineering Consultant",
     description:
-      "삼성전자 DS MES팀 에이전트 기반 Oracle 장애 분석 시스템 ",
+      "Oracle DB 운영 환경의 성능 저하와 이상 징후를 분석하는 Agentic AI 기반 SRE 지원 시스템",
     highlights: [
       "Classifier 기반 라우팅과 Global Health Agent 중심의 Plan-and-Execute Workflow 설계",
       "전문 개발자가 없는 조직에서 LLM 기반 운영 분석 서비스의 문제 정의, 기능 기획, 시스템 구조 설계를 주도",
       "고정 테스트셋, 기대 답변, LLM-as-a-judge를 기반으로 에이전트 응답 품질을 회귀 테스트하고 개선하는 평가 체계 설계",
-      "프로젝트 기본 개발 환경과 CI/CD를 구축하고, Celery / RabbitMQ 기반 비동기 worker 아키텍처를 도입",
-      "DBA / SRE가 반복적으로 수행하던 초기 점검 절차를 AI 기반 분석 워크플로우로 전환",
+      "Celery / RabbitMQ 기반 메시지큐 시스템을 도입해 기존 에이전트 실행과 운영 알람 분석을 비동기 처리 구조로 확장",
+      "DBA / SRE의 반복적인 장애 초기 점검 절차를 AI 기반 분석 워크플로우로 전환하도록 설계",
     ],
     website: null,
     github: null,
