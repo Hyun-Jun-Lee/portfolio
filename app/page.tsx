@@ -217,7 +217,7 @@ export default function Home() {
       {/* ═══ HERO — immersive dark, asymmetric ═══ */}
       <SectionFade>
         <section
-          className="min-h-[100dvh] flex items-center pt-16"
+          className="min-h-[72dvh] flex items-center pt-16"
           style={{
             background:
               "radial-gradient(ellipse 70% 50% at 70% 50%, rgba(30, 215, 96, 0.06), transparent), #121212",
@@ -289,7 +289,7 @@ export default function Home() {
 
       {/* ═══ SKILLS ═══ */}
       <SectionFade>
-        <section id="skills" className="py-16">
+        <section id="skills" className="pt-8 pb-16">
           <div className="max-w-[1200px] mx-auto px-5 md:px-10">
             <SectionHeader title="Skills" />
 
@@ -333,16 +333,18 @@ export default function Home() {
                     <span className="font-mono text-[13px] text-silver">
                       {project.period}
                     </span>
-                    <span className="w-fit rounded-full border border-green-border-soft px-2.5 py-1 text-[11px] font-bold uppercase tracking-[1px] text-green">
-                      {project.role}
-                    </span>
                   </div>
 
                   {/* Content column */}
                   <div>
-                    <h3 className="text-base font-bold text-white mb-1">
-                      {project.name}
-                    </h3>
+                    <div className="mb-2 flex flex-col items-start gap-2">
+                      <h3 className="text-base font-bold text-white mb-0">
+                        {project.name}
+                      </h3>
+                      <span className="rounded-full border border-green-border-soft px-2 py-0.5 text-[10px] font-bold uppercase leading-none tracking-[0.8px] text-green">
+                        {project.role}
+                      </span>
+                    </div>
                     <p className="text-sm text-silver mb-3">
                       {project.description}
                     </p>
