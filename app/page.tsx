@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { AnimateOnScroll } from "./components/AnimateOnScroll";
 import { StaggerReveal } from "./components/StaggerReveal";
 import { SectionFade } from "./components/SectionFade";
@@ -21,7 +22,7 @@ const projects = [
     ],
     website: null,
     github: null,
-    featured: false,
+    featured: true,
   },
   {
     name: "MMA-Savant",
@@ -95,9 +96,9 @@ const projects = [
     description:
       "다양한 포맷의 데이터셋을 저장 및 관리할 수 있는 데이터 관리 시스템",
     highlights: [
-      "유연한 데이터 검색 및 검증을 위한 DSL 개발",
-      "웹 크롤링 수집 파이프라인과 데이터 버전 관리 및 복원 기능",
-      "Clean Architecture 기반 4계층 아키텍처 설계",
+      "다양한 포맷의 데이터셋을 검색 / 검증 / 관리하기 위한 사내 데이터 관리 시스템 구축",
+      "데이터 검색과 검증 조건을 유연하게 정의할 수 있는 DSL 설계",
+      "데이터 버전 관리, 복원, RBAC, 요청 / 승인 워크플로우를 통해 연구 데이터 운영 체계화",
     ],
     website: null,
     github: null,
@@ -227,16 +228,6 @@ export default function Home() {
             <div>
               <div
                 className="reveal-on-load"
-                style={{ animationDelay: "100ms" }}
-              >
-                <div className="inline-flex items-center gap-2 text-xs font-bold text-green tracking-[1.4px] uppercase bg-surface px-3.5 py-1.5 rounded-full w-fit mb-6">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
-                  Product Engineer
-                </div>
-              </div>
-
-              <div
-                className="reveal-on-load"
                 style={{ animationDelay: "220ms" }}
               >
                 <h1 className="text-[clamp(40px,7vw,64px)] font-bold leading-[1.1] tracking-[-1px] text-white mb-2">
@@ -281,10 +272,13 @@ export default function Home() {
             <div className="hidden md:flex justify-end">
               <div className="relative w-[340px] h-[340px]">
                 <div className="absolute -inset-1 border-2 border-green/30 rounded-full" />
-                <img
+                <Image
                   src="/profile.jpg"
                   alt="이현준"
-                  className="w-full h-full object-cover rounded-full shadow-[0px_8px_24px_rgba(0,0,0,0.5)]"
+                  fill
+                  sizes="340px"
+                  preload
+                  className="object-cover rounded-full shadow-[0px_8px_24px_rgba(0,0,0,0.5)]"
                 />
               </div>
             </div>
@@ -338,6 +332,9 @@ export default function Home() {
                   <div className="flex flex-col gap-2">
                     <span className="font-mono text-[13px] text-silver">
                       {project.period}
+                    </span>
+                    <span className="w-fit rounded-full border border-green-border-soft px-2.5 py-1 text-[11px] font-bold uppercase tracking-[1px] text-green">
+                      {project.role}
                     </span>
                   </div>
 
