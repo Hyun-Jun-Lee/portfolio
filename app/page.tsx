@@ -15,10 +15,19 @@ const projects = [
       "Oracle DB 운영 환경의 성능 저하와 이상 징후를 분석하는 Agentic AI 기반 SRE 지원 시스템",
     highlights: [
       "Classifier 기반 라우팅과 Global Health Agent 중심의 Plan-and-Execute Workflow 설계",
+      "반복적인 초기 원인 분석 케이스 기준, 기존 최소 1시간 이상 걸리던 점검 과정을 평균 3분 이내 응답으로 단축",
       "전문 개발자가 없는 조직에서 LLM 기반 운영 분석 서비스의 문제 정의, 기능 기획, 시스템 구조 설계를 주도",
       "고정 테스트셋, 기대 답변, LLM-as-a-judge를 기반으로 에이전트 응답 품질을 회귀 테스트하고 개선하는 평가 체계 설계",
       "Celery / RabbitMQ 기반 메시지큐 시스템을 도입해 기존 에이전트 실행과 운영 알람 분석을 비동기 처리 구조로 확장",
       "DBA / SRE의 반복적인 장애 초기 점검 절차를 AI 기반 분석 워크플로우로 전환하도록 설계",
+    ],
+    keywords: [
+      "Agentic SRE",
+      "Classifier Routing",
+      "Plan-and-Execute",
+      "LLM-as-a-judge",
+      "Celery / RabbitMQ",
+      "DBA Workflow",
     ],
     website: null,
     github: null,
@@ -31,11 +40,19 @@ const projects = [
     role: "Fullstack",
     description: "MMA 경기 데이터 수집 / 분석 / AI 챗봇 플랫폼",
     highlights: [
-      "자연어 질문을 SQL 조회, 결과 해석, 시각화 응답으로 연결하는 LLM 기반 데이터 분석 에이전트 설계",
+      "자연어 질문을 SQL 조회, 결과 해석, 시각화 데이터 생성까지 연결해 MMA 경기 데이터를 대화형으로 분석할 수 있는 에이전트 구현",
       "LangGraph 기반 Supervisor 패턴으로 질의 분류, 도구 호출, 응답 생성 흐름을 오케스트레이션",
       "역할별 AI 에이전트 분리 및 컨텍스트 문서 체계화로 AI-Assisted 개발 프로세스 구축",
-      "Prefect 워크플로우 오케스트레이션으로 주간 자동 데이터 수집 파이프라인 구축",
-      "Blue/Green 무중단 배포 구성으로 prod 환경 서비스 안정성 확보",
+      "경기/선수 데이터를 주기적으로 수집·정제하고, Prefect 기반 워크플로우로 데이터 파이프라인 운영 자동화",
+      "Blue/Green 배포와 운영 자동화를 적용해 데이터 갱신부터 AI 응답 제공까지 지속 운영 가능한 프로덕션 환경 구성",
+    ],
+    keywords: [
+      "Text-to-SQL",
+      "LangGraph Supervisor",
+      "Data Visualization",
+      "Prefect Pipeline",
+      "AI-Assisted Dev",
+      "Blue/Green Deploy",
     ],
     website: "https://mma-savant.com/",
     github: "https://github.com/Hyun-Jun-Lee/mma-savant",
@@ -51,6 +68,14 @@ const projects = [
       "이미지 입력부터 OCR, LLM 분석, 결과 생성까지 이어지는 멀티모달 분석 파이프라인 설계",
       "국내 / 해외 PG 결제 검증, 프로모 코드, 크레딧 차감을 통합한 Freemium 과금 구조 구현",
       "LLM 호출 단계와 분석 흐름을 분리해 비용 효율성과 사용자 경험을 함께 최적화",
+    ],
+    keywords: [
+      "Multimodal OCR",
+      "LLM Pipeline",
+      "Payment Verification",
+      "Credit System",
+      "Freemium Billing",
+      "Cost Optimization",
     ],
     website: "https://www.teamsignal.online/",
     github: null,
@@ -68,6 +93,14 @@ const projects = [
       "프롬프트 버전 관리, 롤백, 버전 간 변경사항 요약을 통해 LLM 실험 운영 흐름 구축",
       "DDD 아키텍처 설계로 도메인별 독립 컨텍스트 구성, AI-Assisted 개발 시 컨텍스트 노이즈 제거",
     ],
+    keywords: [
+      "A/B Arena",
+      "Blind Evaluation",
+      "Prompt Versioning",
+      "Rollback",
+      "LLM Experiment Ops",
+      "DDD Architecture",
+    ],
     website: null,
     github: null,
     featured: false,
@@ -83,6 +116,14 @@ const projects = [
       "키워드 기반 수집, LLM 분류, 자동 태깅으로 이어지는 콘텐츠 분석 파이프라인 구축",
       "RabbitMQ 기반 멀티 워커 구조로 크롤링 / 분류 작업을 비동기 처리하도록 설계",
       "사이트 간 연결 관계를 추적 / 분석하기 위한 그래프 DB 기반 콘텐츠 관계 모델링",
+    ],
+    keywords: [
+      "Web Crawling",
+      "LLM Classification",
+      "Auto Tagging",
+      "RabbitMQ Workers",
+      "Graph DB",
+      "Content Intelligence",
     ],
     website: null,
     github: null,
@@ -100,6 +141,14 @@ const projects = [
       "데이터 검색과 검증 조건을 유연하게 정의할 수 있는 DSL 설계",
       "데이터 버전 관리, 복원, RBAC, 요청 / 승인 워크플로우를 통해 연구 데이터 운영 체계화",
     ],
+    keywords: [
+      "Dataset Search",
+      "Validation DSL",
+      "Version Control",
+      "RBAC",
+      "Approval Workflow",
+      "Research Data Ops",
+    ],
     website: null,
     github: null,
     featured: false,
@@ -115,6 +164,14 @@ const projects = [
       "캐싱, ORM 쿼리 최적화, Full-Text Search로 주요 조회 API 응답 속도 50% 단축",
       "pytest 기반 테스트 체계를 도입해 80% 테스트 커버리지 달성",
     ],
+    keywords: [
+      "FastAPI",
+      "AWS EC2",
+      "Query Optimization",
+      "Full-Text Search",
+      "Caching",
+      "pytest Coverage",
+    ],
     website: "https://team-biskit.vercel.app/",
     github: "https://github.com/BIS-KIT/BISKIT-Backend",
     featured: false,
@@ -129,6 +186,14 @@ const projects = [
       "기업 DB 감사 대응을 위한 로그 수집, 검색, 분석 백오피스 기능 개발",
       "Producer-Consumer 패턴 기반 ETL 파이프라인으로 Oracle / MSSQL / MySQL 로그 수집 구조 구축",
       "세분화된 접근 권한, 쿼리 승인 워크플로우, 고객사별 상태 모니터링 기능 구현",
+    ],
+    keywords: [
+      "Audit Log ETL",
+      "Producer-Consumer",
+      "Oracle / MSSQL / MySQL",
+      "Access Control",
+      "Query Approval",
+      "Backoffice Monitoring",
     ],
     website: null,
     github: null,
@@ -223,7 +288,7 @@ export default function Home() {
               "radial-gradient(ellipse 70% 50% at 70% 50%, rgba(30, 215, 96, 0.06), transparent), #121212",
           }}
         >
-          <div className="max-w-[1200px] mx-auto px-5 md:px-10 w-full py-10 grid grid-cols-1 md:grid-cols-[1fr_360px] gap-10 md:gap-16 items-center">
+          <div className="max-w-[1200px] mx-auto px-5 md:px-10 w-full py-10 grid grid-cols-1 md:grid-cols-[minmax(0,560px)_280px] justify-center gap-8 md:gap-6 items-center">
             {/* Left: Text */}
             <div>
               <div
@@ -234,7 +299,7 @@ export default function Home() {
                   이현준
                 </h1>
                 <p className="text-[clamp(20px,3vw,32px)] font-normal text-silver mb-7">
-                  Product Engineer
+                  AI Product Engineer
                 </p>
               </div>
 
@@ -268,17 +333,17 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right: Circular photo (desktop only) */}
-            <div className="hidden md:flex justify-end">
-              <div className="relative w-[340px] h-[340px]">
-                <div className="absolute -inset-1 border-2 border-green/30 rounded-full" />
+            {/* Right: Profile photo (desktop only) */}
+            <div className="hidden md:flex justify-start">
+              <div className="relative h-[340px] w-[280px]">
+                <div className="absolute -inset-1 rounded-[28px] border border-green/25" />
                 <Image
                   src="/profile.jpg"
                   alt="이현준"
                   fill
-                  sizes="340px"
+                  sizes="280px"
                   preload
-                  className="object-cover rounded-full shadow-[0px_8px_24px_rgba(0,0,0,0.5)]"
+                  className="rounded-[24px] object-cover shadow-[0px_8px_24px_rgba(0,0,0,0.5)]"
                 />
               </div>
             </div>
@@ -287,38 +352,13 @@ export default function Home() {
       </SectionFade>
 
 
-      {/* ═══ SKILLS ═══ */}
-      <SectionFade>
-        <section id="skills" className="pt-8 pb-16">
-          <div className="max-w-[1200px] mx-auto px-5 md:px-10">
-            <SectionHeader title="Skills" />
-
-            <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 gap-3" staggerMs={120}>
-              {skills.map((skill) => (
-                <div key={skill.title} className="bg-surface rounded-lg p-6 h-full hover:bg-surface-mid transition-colors duration-150">
-                  <span className="text-xs font-bold text-green uppercase tracking-[1.4px]">
-                    {skill.label}
-                  </span>
-                  <h3 className="text-lg font-semibold text-white leading-[1.3] mt-3 mb-2">
-                    {skill.title}
-                  </h3>
-                  <p className="text-sm text-silver leading-normal">
-                    {skill.description}
-                  </p>
-                </div>
-              ))}
-            </StaggerReveal>
-          </div>
-        </section>
-      </SectionFade>
-
       {/* ═══ PROJECTS ═══ */}
       <SectionFade>
-        <section id="projects" className="py-16">
+        <section id="projects" className="pt-8 pb-16">
           <div className="max-w-[1200px] mx-auto px-5 md:px-10">
             <SectionHeader title="Projects" />
 
-            <StaggerReveal className="flex flex-col gap-2" staggerMs={80}>
+            <div className="flex flex-col gap-2">
               {projects.map((project) => (
                 <div
                   key={project.name}
@@ -348,6 +388,17 @@ export default function Home() {
                     <p className="text-sm text-silver mb-3">
                       {project.description}
                     </p>
+
+                    <div className="mb-3 flex flex-wrap gap-1.5">
+                      {project.keywords.map((keyword) => (
+                        <span
+                          key={keyword}
+                          className="rounded-[4px] border border-green-border-soft bg-green-soft px-2 py-1 font-mono text-[10px] font-bold leading-none text-green"
+                        >
+                          {keyword}
+                        </span>
+                      ))}
+                    </div>
 
                     <ul className="flex flex-col gap-1">
                       {project.highlights.map((highlight, i) => (
@@ -387,6 +438,31 @@ export default function Home() {
                       </div>
                     )}
                   </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </SectionFade>
+
+      {/* ═══ SKILLS ═══ */}
+      <SectionFade>
+        <section id="skills" className="pt-8 pb-16">
+          <div className="max-w-[1200px] mx-auto px-5 md:px-10">
+            <SectionHeader title="Skills" />
+
+            <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 gap-3" staggerMs={120}>
+              {skills.map((skill) => (
+                <div key={skill.title} className="bg-surface rounded-lg p-6 h-full hover:bg-surface-mid transition-colors duration-150">
+                  <span className="text-xs font-bold text-green uppercase tracking-[1.4px]">
+                    {skill.label}
+                  </span>
+                  <h3 className="text-lg font-semibold text-white leading-[1.3] mt-3 mb-2">
+                    {skill.title}
+                  </h3>
+                  <p className="text-sm text-silver leading-normal">
+                    {skill.description}
+                  </p>
                 </div>
               ))}
             </StaggerReveal>
@@ -447,7 +523,7 @@ export default function Home() {
 
       {/* ═══ CERTIFICATES — pill badges ═══ */}
       <SectionFade>
-        <section className="py-16">
+        <section id="certificates" className="py-16">
           <div className="max-w-[1200px] mx-auto px-5 md:px-10">
             <SectionHeader title="Certificate" />
 
