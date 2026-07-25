@@ -7,7 +7,7 @@ import { CopyEmail } from "./components/CopyEmail";
 
 const projects = [
   {
-    name: "Oracle DB 운영 분석 AI Agent",
+    name: "삼성전자 DS · Oracle DB 운영 분석 AI Agent",
     period: "2026.04 ~",
     type: "Consulting",
     role: "AI Engineering Consultant",
