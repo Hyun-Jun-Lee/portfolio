@@ -21,10 +21,19 @@ export function StaggerReveal({
 }: StaggerRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [shouldReduceMotion, setShouldReduceMotion] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handleMotionPreference = () => {
+      setShouldReduceMotion(motionQuery.matches);
+    };
+
+    handleMotionPreference();
+    motionQuery.addEventListener("change", handleMotionPreference);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -37,7 +46,10 @@ export function StaggerReveal({
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      motionQuery.removeEventListener("change", handleMotionPreference);
+    };
   }, []);
 
   return (
@@ -46,8 +58,14 @@ export function StaggerReveal({
         <div
           style={{
             opacity: visible ? 1 : 0,
-            transform: visible ? "translateY(0)" : "translateY(20px)",
-            transition: `transform 600ms cubic-bezier(0.16, 1, 0.3, 1) ${i * staggerMs}ms, opacity 600ms cubic-bezier(0.16, 1, 0.3, 1) ${i * staggerMs}ms`,
+            transform: shouldReduceMotion
+              ? "none"
+              : visible
+                ? "translateY(0)"
+                : "translateY(12px)",
+            transition: shouldReduceMotion
+              ? `opacity 160ms var(--ease-out) ${i * staggerMs}ms`
+              : `transform var(--duration-reveal) var(--ease-out) ${i * staggerMs}ms, opacity var(--duration-reveal) var(--ease-out) ${i * staggerMs}ms`,
           }}
         >
           {child}

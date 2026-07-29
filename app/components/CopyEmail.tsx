@@ -15,10 +15,16 @@ export function CopyEmail({ email }: { email: string }) {
   return (
     <button
       onClick={handleCopy}
-      className="inline-flex items-center gap-2 text-silver font-mono text-sm tracking-[0.02em] hover:text-white transition-colors duration-150 cursor-pointer"
+      className="inline-flex min-w-[172px] items-center gap-2 text-silver font-mono text-sm tracking-[0.02em] hover:text-white active:scale-[0.97] transition-[color,transform] duration-150 ease-[var(--ease-out)] cursor-pointer"
     >
       <EnvelopeSimple size={16} weight="bold" />
-      {copied ? "Copied!" : email}
+      <span
+        className={`transition-opacity duration-150 ease-[var(--ease-out)] ${
+          copied ? "opacity-100" : "opacity-90"
+        }`}
+      >
+        {copied ? "Copied!" : email}
+      </span>
     </button>
   );
 }

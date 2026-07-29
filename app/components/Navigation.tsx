@@ -106,7 +106,7 @@ export function Navigation() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 bg-near-black border-t border-border-gray px-5 pb-5 pt-2">
+        <div className="md:hidden absolute top-16 left-0 right-0 bg-near-black border-t border-border-gray px-5 pb-5 pt-2 animate-[mobileMenuIn_180ms_var(--ease-out)_both] motion-reduce:animate-[mobileMenuFade_120ms_ease_both]">
           <div className="flex flex-col gap-1">
             {sections.map(({ id, label }) => (
               <a
