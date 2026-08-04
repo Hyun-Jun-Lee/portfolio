@@ -15,10 +15,19 @@ export function AnimateOnScroll({
 }: AnimateOnScrollProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [shouldReduceMotion, setShouldReduceMotion] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handleMotionPreference = () => {
+      setShouldReduceMotion(motionQuery.matches);
+    };
+
+    handleMotionPreference();
+    motionQuery.addEventListener("change", handleMotionPreference);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -34,6 +43,7 @@ export function AnimateOnScroll({
 
     return () => {
       observer.unobserve(el);
+      motionQuery.removeEventListener("change", handleMotionPreference);
     };
   }, []);
 
@@ -42,9 +52,15 @@ export function AnimateOnScroll({
       ref={ref}
       className={className}
       style={{
-        transform: isVisible ? "translateY(0)" : "translateY(16px)",
+        transform: shouldReduceMotion
+          ? "none"
+          : isVisible
+            ? "translateY(0)"
+            : "translateY(12px)",
         opacity: isVisible ? 1 : 0,
-        transition: `transform 600ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, opacity 600ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+        transition: shouldReduceMotion
+          ? `opacity 160ms var(--ease-out) ${delay}ms`
+          : `transform var(--duration-reveal) var(--ease-out) ${delay}ms, opacity var(--duration-reveal) var(--ease-out) ${delay}ms`,
       }}
     >
       {children}

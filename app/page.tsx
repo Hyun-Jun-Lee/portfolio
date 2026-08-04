@@ -14,7 +14,7 @@ const projects = [
     description:
       "Oracle DB 운영 환경의 성능 저하와 이상 징후를 분석하는 Agentic AI 기반 SRE 지원 시스템",
     highlights: [
-      "Classifier 기반 라우팅과 Global Health Agent 중심의 Plan-and-Execute Workflow 설계",
+      "사용자 질문의 의도와 장애 유형을 분석해 필요한 전문 에이전트를 선택·조합하는 Classifier 기반 오케스트레이션 구조 설계",
       "반복적인 초기 원인 분석 케이스 기준, 기존 최소 1시간 이상 걸리던 점검 과정을 평균 3분 이내 응답으로 단축",
       "전문 개발자가 없는 조직에서 LLM 기반 운영 분석 서비스의 문제 정의, 기능 기획, 시스템 구조 설계를 주도",
       "고정 테스트셋, 기대 답변, LLM-as-a-judge를 기반으로 에이전트 응답 품질을 회귀 테스트하고 개선하는 평가 체계 설계",
@@ -362,9 +362,9 @@ export default function Home() {
               {projects.map((project) => (
                 <div
                   key={project.name}
-                  className={`bg-surface rounded-lg p-5 md:p-6 grid grid-cols-1 md:grid-cols-[160px_1fr] gap-3 md:gap-6 hover:bg-surface-mid hover:scale-[1.02] active:scale-[0.99] transition-all duration-200 ease-out${
+                  className={`bg-surface rounded-lg p-5 md:p-6 grid grid-cols-1 md:grid-cols-[160px_1fr] gap-3 md:gap-6 hover:bg-surface-mid hover:scale-[1.02] active:scale-[0.99] transition-[background-color,transform] duration-200 ease-[var(--ease-out)]${
                     project.featured
-                      ? " bg-[linear-gradient(135deg,rgba(30,215,96,0.08)_0%,#181818_40%)] border border-green-border-soft"
+                      ? " bg-[linear-gradient(135deg,rgba(30,215,96,0.08)_0%,rgba(103,232,249,0.05)_48%,#181818_72%)] border border-green-border-soft"
                       : ""
                   }`}
                 >
@@ -381,7 +381,7 @@ export default function Home() {
                       <h3 className="text-base font-bold text-white mb-0">
                         {project.name}
                       </h3>
-                      <span className="rounded-full border border-green-border-soft px-2 py-0.5 text-[10px] font-bold uppercase leading-none tracking-[0.8px] text-green">
+                      <span className="rounded-full border border-cyan-border-soft bg-cyan-soft px-2 py-0.5 text-[10px] font-bold uppercase leading-none tracking-[0.8px] text-cyan">
                         {project.role}
                       </span>
                     </div>
@@ -451,7 +451,7 @@ export default function Home() {
           <div className="max-w-[1200px] mx-auto px-5 md:px-10">
             <SectionHeader title="Skills" />
 
-            <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 gap-3" staggerMs={120}>
+            <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 gap-3" staggerMs={50}>
               {skills.map((skill) => (
                 <div key={skill.title} className="bg-surface rounded-lg p-6 h-full hover:bg-surface-mid transition-colors duration-150">
                   <span className="text-xs font-bold text-green uppercase tracking-[1.4px]">
@@ -476,7 +476,7 @@ export default function Home() {
           <div className="max-w-[1200px] mx-auto px-5 md:px-10">
             <SectionHeader title="Experience" />
 
-            <StaggerReveal className="flex flex-col" staggerMs={120}>
+            <StaggerReveal className="flex flex-col" staggerMs={50}>
               {experiences.map((exp, index) => (
                 <div
                   key={exp.company}
@@ -527,7 +527,7 @@ export default function Home() {
           <div className="max-w-[1200px] mx-auto px-5 md:px-10">
             <SectionHeader title="Certificate" />
 
-            <StaggerReveal className="flex flex-wrap gap-2.5" staggerMs={100}>
+            <StaggerReveal className="flex flex-wrap gap-2.5" staggerMs={40}>
               {certificates.map((cert) => (
                 <div key={cert.name} className="inline-flex items-center gap-2.5 bg-surface rounded-full px-5 py-2.5 hover:bg-surface-mid transition-colors duration-150">
                   <span className="font-mono text-xs font-bold text-green">
@@ -564,7 +564,7 @@ export default function Home() {
         </section>
       </SectionFade>
 
-      {/* ═══ FOOTER — stays dark (Spotify never goes light) ═══ */}
+      {/* ═══ FOOTER — dark system baseline ═══ */}
       <footer className="border-t border-border-gray py-12">
         <div className="max-w-[1200px] mx-auto px-5 md:px-10">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
