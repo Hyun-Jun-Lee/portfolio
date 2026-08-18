@@ -299,7 +299,7 @@ export default function Home() {
                   이현준
                 </h1>
                 <p className="text-[clamp(20px,3vw,32px)] font-normal text-silver mb-7">
-                  AI Product Engineer
+                  Product Engineer
                 </p>
               </div>
 
