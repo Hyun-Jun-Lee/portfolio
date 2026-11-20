@@ -4,10 +4,6 @@
   /* ── Brand Design Tokens ── */
   --color-green: #1ed760;
   --color-green-active: #1fdf64;
-  --color-green-border: #1db954;
-  --color-cyan: #67e8f9;
-  --color-cyan-soft: rgba(103, 232, 249, 0.08);
-  --color-cyan-border-soft: rgba(103, 232, 249, 0.18);
   --color-near-black: #121212;
   --color-surface: #181818;
   --color-surface-mid: #1f1f1f;
@@ -16,12 +12,10 @@
   --color-white: #ffffff;
   --color-silver: #b3b3b3;
   --color-near-white: #cbcbcb;
-  --color-border-gray: #4d4d4d;
+  --color-border-gray: #303030;
   --color-light-border: #7c7c7c;
   --color-on-green: #000000;
   --color-negative: #f3727f;
-  --color-green-soft: rgba(30, 215, 96, 0.08);
-  --color-green-border-soft: rgba(30, 215, 96, 0.15);
 
   /* ── Shadows ── */
   --shadow-medium: 0px 8px 8px rgba(0, 0, 0, 0.3);
@@ -43,7 +37,7 @@
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --duration-press: 160ms;
   --duration-hover: 150ms;
-  --duration-reveal: 300ms;
+  --duration-reveal: 260ms;
 }
 
 html {
@@ -72,7 +66,7 @@ body {
 @keyframes reveal {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;

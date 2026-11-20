@@ -1,6 +1,4 @@
 import Image from "next/image";
-import { AnimateOnScroll } from "./components/AnimateOnScroll";
-import { StaggerReveal } from "./components/StaggerReveal";
 import { SectionFade } from "./components/SectionFade";
 import { GithubLogo, ArrowUpRight } from "./components/Icons";
 import { CopyEmail } from "./components/CopyEmail";
@@ -270,80 +268,128 @@ const skills = [
 
 function SectionHeader({ title }: { title: string }) {
   return (
-    <AnimateOnScroll>
-      <h2 className="text-2xl font-bold text-white mb-8">{title}</h2>
-    </AnimateOnScroll>
+    <h2 className="mb-6 text-2xl font-semibold text-white">{title}</h2>
+  );
+}
+
+type Project = (typeof projects)[number];
+
+function ProjectHighlights({ highlights }: { highlights: string[] }) {
+  return (
+    <ul className="flex max-w-[76ch] flex-col gap-2">
+      {highlights.map((highlight) => (
+        <li
+          key={highlight}
+          className="relative pl-4 text-sm leading-relaxed text-near-white before:absolute before:left-0 before:top-[9px] before:h-1 before:w-1 before:rounded-full before:bg-silver"
+        >
+          {highlight}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function ProjectBody({
+  project,
+  previewCount,
+}: {
+  project: Project;
+  previewCount?: number;
+}) {
+  const visibleHighlights = previewCount
+    ? project.highlights.slice(0, previewCount)
+    : project.highlights;
+  const extraHighlights = previewCount
+    ? project.highlights.slice(previewCount)
+    : [];
+
+  return (
+    <>
+      <ProjectHighlights highlights={visibleHighlights} />
+      {extraHighlights.length > 0 && (
+        <details className="group mt-4">
+          <summary className="w-fit cursor-pointer list-none rounded-sm text-sm text-silver transition-colors duration-150 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-green [&::-webkit-details-marker]:hidden">
+            <span className="group-open:hidden">추가 기여 {extraHighlights.length}개 보기</span>
+            <span className="hidden group-open:inline">접기</span>
+          </summary>
+          <div className="mt-4">
+            <ProjectHighlights highlights={extraHighlights} />
+          </div>
+        </details>
+      )}
+      <p className="mt-5 max-w-[76ch] text-[13px] leading-relaxed text-silver">
+        {project.keywords.join(" · ")}
+      </p>
+      {(project.website || project.github) && (
+        <div className="mt-5 flex gap-5">
+          {project.website && (
+            <a
+              href={project.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-sm font-medium text-green hover:text-green-active transition-colors duration-150"
+            >
+              Visit <ArrowUpRight size={14} weight="regular" />
+            </a>
+          )}
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-sm font-medium text-green hover:text-green-active transition-colors duration-150"
+            >
+              GitHub <ArrowUpRight size={14} weight="regular" />
+            </a>
+          )}
+        </div>
+      )}
+    </>
   );
 }
 
 export default function Home() {
   return (
     <>
-      {/* ═══ HERO — immersive dark, asymmetric ═══ */}
+      {/* ═══ HERO ═══ */}
       <SectionFade>
-        <section
-          className="min-h-[72dvh] flex items-center pt-16"
-          style={{
-            background:
-              "radial-gradient(ellipse 70% 50% at 70% 50%, rgba(30, 215, 96, 0.06), transparent), #121212",
-          }}
-        >
-          <div className="max-w-[1200px] mx-auto px-5 md:px-10 w-full py-10 grid grid-cols-1 md:grid-cols-[minmax(0,560px)_280px] justify-center gap-8 md:gap-6 items-center">
-            {/* Left: Text */}
-            <div>
-              <div
-                className="reveal-on-load"
-                style={{ animationDelay: "220ms" }}
-              >
+        <section className="flex items-center pt-16 md:min-h-[58dvh]">
+          <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 items-center gap-10 px-5 py-10 md:grid-cols-[minmax(0,1fr)_280px] md:gap-16 md:px-10">
+            <div className="reveal-on-load max-w-[560px]">
                 <h1 className="text-[clamp(40px,7vw,64px)] font-bold leading-[1.1] tracking-[-1px] text-white mb-2">
                   이현준
                 </h1>
                 <p className="text-[clamp(20px,3vw,32px)] font-normal text-silver mb-7">
                   Product Engineer
                 </p>
-              </div>
-
-              <div
-                className="reveal-on-load"
-                style={{ animationDelay: "340ms" }}
-              >
                 <p className="text-base text-silver leading-relaxed max-w-[48ch]">
-                  기능을 구현하는 것보다 문제를 해결하는 것에 관심이 있습니다.
-                  <br />
-                  여러 아이디어를 직접 서비스로 만들고 운영해온 경험을 통해,
-                  <br />
+                  기능을 구현하는 것보다 문제를 해결하는 것에 관심이 있습니다. 여러
+                  아이디어를 직접 서비스로 만들고 운영해온 경험을 통해,
                   좋은 코드보다 좋은 프로덕트를 만드는 엔지니어를 지향합니다.
                 </p>
-              </div>
-
-              <div
-                className="reveal-on-load flex flex-wrap items-center gap-3 mt-8"
-                style={{ animationDelay: "460ms" }}
-              >
+              <div className="mt-8 flex flex-wrap items-center gap-4">
                 <a
                   href="https://github.com/Hyun-Jun-Lee"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-green text-on-green text-sm font-bold leading-none tracking-[1.4px] uppercase px-8 py-3.5 rounded-[500px] hover:scale-[1.04] active:scale-[0.98] transition-transform duration-100"
+                  className="inline-flex h-11 items-center gap-2 rounded-lg bg-green px-6 text-sm font-semibold text-on-green transition-colors duration-150 hover:bg-green-active"
                 >
-                  <GithubLogo size={16} weight="bold" />
+                  <GithubLogo size={16} weight="regular" />
                   GitHub
                 </a>
                 <CopyEmail email="bhk0827@gmail.com" />
               </div>
             </div>
 
-            {/* Right: Profile photo (desktop only) */}
-            <div className="hidden md:flex justify-start">
-              <div className="relative h-[340px] w-[280px]">
-                <div className="absolute -inset-1 rounded-[28px] border border-green/25" />
+            <div className="hidden md:flex justify-end">
+              <div className="relative h-[340px] w-[280px] overflow-hidden rounded-2xl border border-white/10">
                 <Image
                   src="/profile.jpg"
                   alt="이현준"
                   fill
                   sizes="280px"
                   preload
-                  className="rounded-[24px] object-cover shadow-[0px_8px_24px_rgba(0,0,0,0.5)]"
+                  className="object-cover"
                 />
               </div>
             </div>
@@ -354,91 +400,50 @@ export default function Home() {
 
       {/* ═══ PROJECTS ═══ */}
       <SectionFade>
-        <section id="projects" className="pt-8 pb-16">
+        <section id="projects" className="scroll-mt-16 py-12">
           <div className="max-w-[1200px] mx-auto px-5 md:px-10">
             <SectionHeader title="Projects" />
 
-            <div className="flex flex-col gap-2">
-              {projects.map((project) => (
-                <div
+            <div className="flex flex-col gap-4">
+              {projects.filter((project) => project.featured).map((project) => (
+                <article
                   key={project.name}
-                  className={`bg-surface rounded-lg p-5 md:p-6 grid grid-cols-1 md:grid-cols-[160px_1fr] gap-3 md:gap-6 hover:bg-surface-mid hover:scale-[1.02] active:scale-[0.99] transition-[background-color,transform] duration-200 ease-[var(--ease-out)]${
-                    project.featured
-                      ? " bg-[linear-gradient(135deg,rgba(30,215,96,0.08)_0%,rgba(103,232,249,0.05)_48%,#181818_72%)] border border-green-border-soft"
-                      : ""
-                  }`}
+                  className="grid grid-cols-1 gap-4 rounded-xl border border-white/10 bg-surface p-6 md:grid-cols-[160px_minmax(0,1fr)] md:gap-8 md:p-8"
                 >
-                  {/* Meta column */}
-                  <div className="flex flex-col gap-2">
-                    <span className="font-mono text-[13px] text-silver">
-                      {project.period}
-                    </span>
+                  <div className="flex flex-wrap items-start gap-x-4 gap-y-1 md:flex-col md:gap-2">
+                    <span className="font-mono text-[13px] text-silver">{project.period}</span>
+                    <span className="text-sm text-silver">{project.role}</span>
                   </div>
-
-                  {/* Content column */}
                   <div>
-                    <div className="mb-2 flex flex-col items-start gap-2">
-                      <h3 className="text-base font-bold text-white mb-0">
-                        {project.name}
-                      </h3>
-                      <span className="rounded-full border border-cyan-border-soft bg-cyan-soft px-2 py-0.5 text-[10px] font-bold uppercase leading-none tracking-[0.8px] text-cyan">
-                        {project.role}
-                      </span>
-                    </div>
-                    <p className="text-sm text-silver mb-3">
+                    <h3 className="mb-2 text-xl font-semibold text-white">{project.name}</h3>
+                    <p className="mb-5 max-w-[76ch] text-sm leading-relaxed text-silver">
                       {project.description}
                     </p>
-
-                    <div className="mb-3 flex flex-wrap gap-1.5">
-                      {project.keywords.map((keyword) => (
-                        <span
-                          key={keyword}
-                          className="rounded-[4px] border border-green-border-soft bg-green-soft px-2 py-1 font-mono text-[10px] font-bold leading-none text-green"
-                        >
-                          {keyword}
-                        </span>
-                      ))}
-                    </div>
-
-                    <ul className="flex flex-col gap-1">
-                      {project.highlights.map((highlight, i) => (
-                        <li
-                          key={i}
-                          className="text-sm text-near-white leading-normal pl-4 relative before:content-[''] before:absolute before:left-0 before:top-[9px] before:w-[5px] before:h-[5px] before:rounded-full before:bg-green before:opacity-50"
-                        >
-                          {highlight}
-                        </li>
-                      ))}
-                    </ul>
-
-                    {(project.website || project.github) && (
-                      <div className="flex gap-3 mt-3">
-                        {project.website && (
-                          <a
-                            href={project.website}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-sm font-bold text-green hover:opacity-80 transition-opacity duration-150"
-                          >
-                            Visit
-                            <ArrowUpRight size={14} weight="bold" />
-                          </a>
-                        )}
-                        {project.github && (
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-sm font-bold text-green hover:opacity-80 transition-opacity duration-150"
-                          >
-                            GitHub
-                            <ArrowUpRight size={14} weight="bold" />
-                          </a>
-                        )}
-                      </div>
-                    )}
+                    <ProjectBody project={project} previewCount={3} />
                   </div>
-                </div>
+                </article>
+              ))}
+            </div>
+
+            <div className="mt-8 border-t border-white/10">
+              {projects.filter((project) => !project.featured).map((project) => (
+                <details key={project.name} className="group border-b border-white/10">
+                  <summary className="grid cursor-pointer list-none grid-cols-1 gap-2 py-5 transition-colors duration-150 hover:bg-surface md:grid-cols-[160px_minmax(0,1fr)] md:gap-8 [&::-webkit-details-marker]:hidden">
+                    <span className="font-mono text-[13px] text-silver">{project.period}</span>
+                    <span className="flex flex-col gap-1 md:flex-row md:items-start md:justify-between md:gap-6">
+                      <span className="flex flex-col gap-1">
+                        <span className="text-base font-medium text-white">{project.name}</span>
+                        <span className="text-sm leading-relaxed text-silver">{project.description}</span>
+                      </span>
+                      <span className="shrink-0 text-sm text-silver group-open:hidden">자세히 보기</span>
+                      <span className="hidden shrink-0 text-sm text-silver group-open:inline">접기</span>
+                    </span>
+                  </summary>
+                  <div className="pb-6 md:pl-48">
+                    <p className="mb-4 text-sm text-silver">{project.role}</p>
+                    <ProjectBody project={project} />
+                  </div>
+                </details>
               ))}
             </div>
           </div>
@@ -447,36 +452,34 @@ export default function Home() {
 
       {/* ═══ SKILLS ═══ */}
       <SectionFade>
-        <section id="skills" className="pt-8 pb-16">
+        <section id="skills" className="scroll-mt-16 py-12">
           <div className="max-w-[1200px] mx-auto px-5 md:px-10">
             <SectionHeader title="Skills" />
 
-            <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 gap-3" staggerMs={50}>
+            <div className="grid grid-cols-1 gap-x-12 md:grid-cols-2">
               {skills.map((skill) => (
-                <div key={skill.title} className="bg-surface rounded-lg p-6 h-full hover:bg-surface-mid transition-colors duration-150">
-                  <span className="text-xs font-bold text-green uppercase tracking-[1.4px]">
-                    {skill.label}
-                  </span>
-                  <h3 className="text-lg font-semibold text-white leading-[1.3] mt-3 mb-2">
+                <div key={skill.title} className="border-t border-white/10 py-5">
+                  <span className="text-[13px] text-silver">{skill.label}</span>
+                  <h3 className="mb-2 mt-1 text-base font-medium text-white">
                     {skill.title}
                   </h3>
-                  <p className="text-sm text-silver leading-normal">
+                  <p className="max-w-[55ch] text-sm leading-relaxed text-silver">
                     {skill.description}
                   </p>
                 </div>
               ))}
-            </StaggerReveal>
+            </div>
           </div>
         </section>
       </SectionFade>
 
       {/* ═══ EXPERIENCE ═══ */}
       <SectionFade>
-        <section id="experience" className="py-16">
+        <section id="experience" className="scroll-mt-16 py-12">
           <div className="max-w-[1200px] mx-auto px-5 md:px-10">
             <SectionHeader title="Experience" />
 
-            <StaggerReveal className="flex flex-col" staggerMs={50}>
+            <div className="flex flex-col">
               {experiences.map((exp, index) => (
                 <div
                   key={exp.company}
@@ -494,7 +497,7 @@ export default function Home() {
                     <h3 className="text-base font-bold text-white mb-1">
                       {exp.company}
                     </h3>
-                    <span className="text-sm font-bold text-green">
+                    <span className="text-sm font-medium text-near-white">
                       {exp.role}
                     </span>
                     <p className="text-xs text-silver mt-1 mb-2.5">
@@ -516,50 +519,48 @@ export default function Home() {
                   </div>
                 </div>
               ))}
-            </StaggerReveal>
+            </div>
           </div>
         </section>
       </SectionFade>
 
-      {/* ═══ CERTIFICATES — pill badges ═══ */}
+      {/* ═══ CERTIFICATES ═══ */}
       <SectionFade>
-        <section id="certificates" className="py-16">
+        <section id="certificates" className="scroll-mt-16 py-12">
           <div className="max-w-[1200px] mx-auto px-5 md:px-10">
             <SectionHeader title="Certificate" />
 
-            <StaggerReveal className="flex flex-wrap gap-2.5" staggerMs={40}>
+            <div className="flex flex-wrap gap-x-8 gap-y-3 border-t border-white/10 pt-5">
               {certificates.map((cert) => (
-                <div key={cert.name} className="inline-flex items-center gap-2.5 bg-surface rounded-full px-5 py-2.5 hover:bg-surface-mid transition-colors duration-150">
-                  <span className="font-mono text-xs font-bold text-green">
+                <div key={cert.name} className="inline-flex items-center gap-2">
+                  <span className="font-mono text-[13px] text-silver">
                     {cert.year}
                   </span>
-                  <span className="text-sm font-bold text-white">
+                  <span className="text-sm text-near-white">
                     {cert.name}
                   </span>
                 </div>
               ))}
-            </StaggerReveal>
+            </div>
           </div>
         </section>
       </SectionFade>
 
       {/* ═══ CTA BAND ═══ */}
       <SectionFade>
-        <section id="contact" className="py-16">
+        <section id="contact" className="scroll-mt-16 py-12">
           <div className="max-w-[1200px] mx-auto px-5 md:px-10">
-            <AnimateOnScroll>
-            <div className="bg-surface rounded-lg px-8 py-12 md:px-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-[0px_8px_8px_rgba(0,0,0,0.3)]">
+            <div className="bg-surface rounded-xl border border-white/10 px-8 py-10 md:px-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               <h2 className="text-2xl font-bold text-white max-w-[480px]">
                 새로운 기회나 협업에 열려 있습니다
               </h2>
               <a
                 href="mailto:bhk0827@gmail.com"
-                className="inline-flex items-center gap-2 bg-green text-on-green text-sm font-bold leading-none tracking-[1.4px] uppercase px-8 py-3.5 rounded-[500px] hover:scale-[1.04] active:scale-[0.98] transition-transform duration-100 shrink-0"
+                className="inline-flex h-11 items-center gap-2 rounded-lg bg-green px-6 text-sm font-semibold text-on-green transition-colors duration-150 hover:bg-green-active shrink-0"
               >
                 Contact
               </a>
             </div>
-          </AnimateOnScroll>
           </div>
         </section>
       </SectionFade>

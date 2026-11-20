@@ -16,35 +16,23 @@ export function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-
-    sections.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveSection(id);
-          }
-        },
-        { threshold: 0.2, rootMargin: "-80px 0px -40% 0px" }
-      );
-
-      observer.observe(el);
-      observers.push(observer);
-    });
-
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      const marker = window.innerHeight * 0.25;
+      const current = [...sections].reverse().find(({ id }) => {
+        const section = document.getElementById(id);
+        return section && section.getBoundingClientRect().top <= marker;
+      });
+      setActiveSection(current?.id ?? "");
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
     handleScroll();
 
     return () => {
-      observers.forEach((o) => o.disconnect());
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, []);
 
@@ -54,14 +42,16 @@ export function Navigation() {
         scrolled ? "bg-near-black" : "bg-near-black/80 backdrop-blur-sm"
       }`}
     >
-      <div className="max-w-[1200px] mx-auto px-5 md:px-10 w-full flex items-center justify-end md:justify-center">
-        {/* Desktop — pill nav links */}
-        <div className="hidden md:flex items-center gap-2">
+      <div className="max-w-[1200px] mx-auto px-5 md:px-10 w-full flex items-center justify-between">
+        <a href="#" className="text-base font-semibold text-white transition-colors duration-150 hover:text-silver">
+          이현준
+        </a>
+        <div className="hidden md:flex items-center gap-1">
           {sections.map(({ id, label }) => (
             <a
               key={id}
               href={`#${id}`}
-              className={`text-sm font-bold px-4 py-2 rounded-full transition-colors duration-150 ${
+              className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-150 ${
                 activeSection === id
                   ? "text-white bg-surface-mid"
                   : "text-silver hover:text-white hover:bg-surface-mid"
@@ -75,8 +65,10 @@ export function Navigation() {
         {/* Mobile toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-silver hover:text-white transition-colors"
-          aria-label="Toggle menu"
+          className="md:hidden rounded-lg p-2 text-silver transition-colors hover:text-white"
+          aria-label={mobileOpen ? "메뉴 닫기" : "메뉴 열기"}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-navigation"
         >
           {mobileOpen ? (
             <svg
@@ -106,14 +98,14 @@ export function Navigation() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 bg-near-black border-t border-border-gray px-5 pb-5 pt-2 animate-[mobileMenuIn_180ms_var(--ease-out)_both] motion-reduce:animate-[mobileMenuFade_120ms_ease_both]">
+        <div id="mobile-navigation" className="md:hidden absolute top-16 left-0 right-0 bg-near-black border-t border-border-gray px-5 pb-5 pt-2 animate-[mobileMenuIn_180ms_var(--ease-out)_both] motion-reduce:animate-[mobileMenuFade_120ms_ease_both]">
           <div className="flex flex-col gap-1">
             {sections.map(({ id, label }) => (
               <a
                 key={id}
                 href={`#${id}`}
                 onClick={() => setMobileOpen(false)}
-                className={`text-sm font-bold py-3 px-4 rounded-full transition-colors duration-150 ${
+                className={`rounded-lg px-4 py-3 text-sm font-medium transition-colors duration-150 ${
                   activeSection === id
                     ? "text-white bg-surface-mid"
                     : "text-silver hover:text-white"
