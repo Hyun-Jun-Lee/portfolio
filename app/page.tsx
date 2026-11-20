@@ -5,8 +5,34 @@ import { CopyEmail } from "./components/CopyEmail";
 
 const projects = [
   {
+    name: "SK Hynix · 비정형 문서 Asset Context 생성 AI Agent",
+    period: "2026.09.01 ~ 2026.12.15",
+    type: "Consulting",
+    role: "AI Engineering, 비정형 담당",
+    description:
+      "기업의 PDF·DOCX·PPTX를 원본 구조와 위치 정보까지 보존해 처리하고, 업무 도메인별 검색에 필요한 원문 근거 기반 컨텍스트를 생성하는 AI 파이프라인",
+    highlights: [
+      "PDF·DOCX·PPTX의 본문·표·그림을 추출하면서 원본 순서와 페이지·슬라이드 위치를 보존하는 파이프라인 설계·구현",
+      "문서 구간을 업무 도메인별로 분류·묶고, 요약·개체·사건을 원문 근거와 연결한 검색 컨텍스트 생성",
+      "Temporal 기반 역할별 워커, PDF 페이지 분할 처리, 실패 구간 재시도로 문서 처리 흐름 구성",
+      "OCR 품질이 낮은 PDF 페이지만 선별해 보완하고, LLM Agent로 문서 제목·제목 계층의 정규화 결과를 검토",
+      "문서 구조를 보존한 Section·Chunk를 생성하고, 도메인 변경·제외 구간·입력 크기를 기준으로 동일 도메인 Unit의 경계를 결정",
+      "도메인 프로파일을 생성·버전 관리하고, 이를 활용해 Unit의 요약·개체·사건을 원문 근거와 함께 추출",
+    ],
+    keywords: [
+      "Docling",
+      "Temporal",
+      "LLM Agent",
+      "Domain Classification",
+      "Document Chunking",
+    ],
+    website: null,
+    github: null,
+    featured: true,
+  },
+  {
     name: "삼성전자 DS · Oracle DB 운영 분석 AI Agent",
-    period: "2026.04 ~",
+    period: "2026.04.01 ~ 2026.07.31",
     type: "Consulting",
     role: "AI Engineering Consultant",
     description:
@@ -54,7 +80,7 @@ const projects = [
     ],
     website: "https://mma-savant.com/",
     github: "https://github.com/Hyun-Jun-Lee/mma-savant",
-    featured: true,
+    featured: false,
   },
   {
     name: "Signal.AI",
@@ -309,7 +335,7 @@ function ProjectBody({
       {extraHighlights.length > 0 && (
         <details className="group mt-4">
           <summary className="w-fit cursor-pointer list-none rounded-sm text-sm text-silver transition-colors duration-150 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-green [&::-webkit-details-marker]:hidden">
-            <span className="group-open:hidden">추가 기여 {extraHighlights.length}개 보기</span>
+            <span className="group-open:hidden">펼치기</span>
             <span className="hidden group-open:inline">접기</span>
           </summary>
           <div className="mt-4">
