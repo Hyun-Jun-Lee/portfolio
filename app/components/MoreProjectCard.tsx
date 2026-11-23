@@ -2,6 +2,8 @@
 
 import { useId, useState, type ReactNode } from "react";
 import { ArrowUpRight } from "./Icons";
+import type { Language } from "../lib/i18n";
+import { translate } from "../lib/i18n";
 
 interface MoreProjectCardProps {
   project: {
@@ -11,10 +13,11 @@ interface MoreProjectCardProps {
     website: string | null;
     github: string | null;
   };
+  language: Language;
   children: ReactNode;
 }
 
-export function MoreProjectCard({ project, children }: MoreProjectCardProps) {
+export function MoreProjectCard({ project, language, children }: MoreProjectCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const detailsId = useId();
 
@@ -22,8 +25,8 @@ export function MoreProjectCard({ project, children }: MoreProjectCardProps) {
     <article className="flex min-h-[210px] w-[82vw] max-w-[400px] shrink-0 snap-start flex-col rounded-xl border border-white/10 bg-surface sm:w-[360px] lg:w-[390px]">
       <div className="px-6 pt-6">
         <span className="block font-mono text-[13px] text-silver">{project.period}</span>
-        <h3 className="mt-5 text-lg font-medium text-white">{project.name}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-silver">{project.description}</p>
+        <h3 className="mt-5 text-lg font-medium text-white">{translate(language, project.name)}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-silver">{translate(language, project.description)}</p>
       </div>
 
       {(project.website || project.github) && (
@@ -58,7 +61,7 @@ export function MoreProjectCard({ project, children }: MoreProjectCardProps) {
         aria-controls={detailsId}
         onClick={() => setIsExpanded((expanded) => !expanded)}
       >
-        {isExpanded ? "접기" : "자세히 보기"}
+        {translate(language, isExpanded ? "접기" : "자세히 보기")}
       </button>
 
       {isExpanded && (

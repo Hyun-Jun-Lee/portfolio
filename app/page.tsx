@@ -1,8 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import { SectionFade } from "./components/SectionFade";
 import { GithubLogo, ArrowUpRight } from "./components/Icons";
 import { CopyEmail } from "./components/CopyEmail";
 import { MoreProjectCard } from "./components/MoreProjectCard";
+import { useLanguage } from "./components/LanguageProvider";
+import { translate } from "./lib/i18n";
 
 const projects = [
   {
@@ -307,6 +311,8 @@ function SectionHeader({ title }: { title: string }) {
 type Project = (typeof projects)[number];
 
 function ProjectHighlights({ highlights }: { highlights: string[] }) {
+  const { language } = useLanguage();
+
   return (
     <ul className="flex max-w-[76ch] flex-col gap-2">
       {highlights.map((highlight) => (
@@ -314,7 +320,7 @@ function ProjectHighlights({ highlights }: { highlights: string[] }) {
           key={highlight}
           className="relative pl-4 text-sm leading-relaxed text-near-white before:absolute before:left-0 before:top-[9px] before:h-1 before:w-1 before:rounded-full before:bg-silver"
         >
-          {highlight}
+          {translate(language, highlight)}
         </li>
       ))}
     </ul>
@@ -330,6 +336,7 @@ function ProjectBody({
   previewCount?: number;
   showLinks?: boolean;
 }) {
+  const { language } = useLanguage();
   const visibleHighlights = previewCount
     ? project.highlights.slice(0, previewCount)
     : project.highlights;
@@ -343,8 +350,8 @@ function ProjectBody({
       {extraHighlights.length > 0 && (
         <details className="group mt-4">
           <summary className="w-fit cursor-pointer list-none rounded-sm text-sm text-silver transition-colors duration-150 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-green [&::-webkit-details-marker]:hidden">
-            <span className="group-open:hidden">펼치기</span>
-            <span className="hidden group-open:inline">접기</span>
+            <span className="group-open:hidden">{translate(language, "펼치기")}</span>
+            <span className="hidden group-open:inline">{translate(language, "접기")}</span>
           </summary>
           <div className="mt-4">
             <ProjectHighlights highlights={extraHighlights} />
@@ -383,6 +390,8 @@ function ProjectBody({
 }
 
 export default function Home() {
+  const { language } = useLanguage();
+
   return (
     <>
       {/* ═══ HERO ═══ */}
@@ -392,7 +401,7 @@ export default function Home() {
             <div className="hero-portrait relative h-[270px] w-[260px] overflow-hidden rounded-t-xl sm:h-[290px] sm:w-[280px] md:order-2 md:h-[330px] md:w-[320px] md:justify-self-end">
               <Image
                 src="/profile-hero.jpeg"
-                alt="이현준"
+                alt={language === "ko" ? "이현준" : "Hyun Jun Lee"}
                 fill
                 sizes="(min-width: 768px) 320px, (min-width: 640px) 280px, 260px"
                 preload
@@ -402,18 +411,18 @@ export default function Home() {
 
             <div className="reveal-on-load max-w-[560px] md:order-1">
               <h1 className="mb-3 text-[clamp(40px,7vw,64px)] font-medium leading-[1.05] tracking-[-0.02em] text-white">
-                이현준
+                {language === "ko" ? "이현준" : "Hyun Jun Lee"}
               </h1>
               <p className="mb-6 text-[clamp(20px,3vw,32px)] font-normal text-silver">
                 Product Engineer
               </p>
               <p className="max-w-[52ch] text-base leading-relaxed text-silver">
-                기능을 구현하는 것보다 문제를 해결하는 것에 관심이 있습니다. 여러
-                아이디어를 직접 서비스로 만들고 운영해온 경험을 통해,
-                좋은 코드보다 좋은 프로덕트를 만드는 엔지니어를 지향합니다.
+                {translate(language, "기능을 구현하는 것보다 문제를 해결하는 것에 관심이 있습니다.")}
+                <br />
+                {translate(language, "좋은 코드보다 좋은 프로덕트를 만드는 엔지니어를 지향합니다.")}
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4 md:justify-start">
-                <CopyEmail email="bhk0827@gmail.com" />
+                <CopyEmail email="bhk0827@gmail.com" language={language} />
                 <a
                   href="https://github.com/Hyun-Jun-Lee"
                   target="_blank"
@@ -445,12 +454,12 @@ export default function Home() {
                   <div className="featured-project-card h-full rounded-xl border border-white/10 bg-surface p-6 md:p-8">
                     <div className="mb-5 flex flex-wrap items-baseline gap-x-4 gap-y-1">
                       <span className="font-mono text-[13px] text-silver">{project.period}</span>
-                      <span className="text-sm text-silver">{project.role}</span>
+                      <span className="text-sm text-silver">{translate(language, project.role)}</span>
                     </div>
                     <div>
-                      <h3 className="mb-2 text-xl font-semibold text-white">{project.name}</h3>
+                      <h3 className="mb-2 text-xl font-semibold text-white">{translate(language, project.name)}</h3>
                       <p className="mb-5 max-w-[76ch] text-sm leading-relaxed text-silver">
-                        {project.description}
+                        {translate(language, project.description)}
                       </p>
                       <ProjectBody project={project} previewCount={3} />
                     </div>
@@ -461,17 +470,17 @@ export default function Home() {
 
             <div className="mt-12 flex items-baseline justify-between gap-4">
               <h3 className="text-base font-semibold text-white">More Projects</h3>
-              <p className="text-xs text-silver">좌우로 스크롤해 더 보기</p>
+              <p className="text-xs text-silver">{translate(language, "좌우로 스크롤해 더 보기")}</p>
             </div>
             <div
               className="project-rail mt-4 flex snap-x snap-proximity items-start gap-4 overflow-x-auto pb-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
               role="region"
-              aria-label="그 외 프로젝트, 가로로 스크롤"
+              aria-label={translate(language, "그 외 프로젝트, 가로로 스크롤")}
               tabIndex={0}
             >
               {projects.filter((project) => !project.featured).map((project) => (
-                <MoreProjectCard key={project.name} project={project}>
-                  <p className="mb-4 text-sm text-silver">{project.role}</p>
+                <MoreProjectCard key={project.name} project={project} language={language}>
+                  <p className="mb-4 text-sm text-silver">{translate(language, project.role)}</p>
                   <ProjectBody project={project} showLinks={false} />
                 </MoreProjectCard>
               ))}
@@ -518,13 +527,13 @@ export default function Home() {
                       {exp.period}
                     </time>
                     <h3 className="text-lg font-medium leading-6 text-white">
-                      {exp.company}
+                      {translate(language, exp.company)}
                     </h3>
                     <span className="mt-1 block text-sm text-near-white">
-                      {exp.role}
+                      {translate(language, exp.role)}
                     </span>
                     <p className="mb-4 mt-1 text-[13px] leading-5 text-silver">
-                      {exp.description}
+                      {translate(language, exp.description)}
                     </p>
                     <ProjectHighlights highlights={exp.highlights} />
                   </div>
@@ -549,7 +558,7 @@ export default function Home() {
                     {skill.title}
                   </h3>
                   <p className="max-w-[55ch] text-sm leading-relaxed text-silver">
-                    {skill.description}
+                    {translate(language, skill.description)}
                   </p>
                 </div>
               ))}
@@ -564,7 +573,7 @@ export default function Home() {
           <div className="max-w-[1200px] mx-auto px-5 md:px-10">
             <div className="bg-surface rounded-xl border border-white/10 px-8 py-10 md:px-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               <h2 className="max-w-[480px] text-2xl font-medium text-white">
-                새로운 기회나 협업에 열려 있습니다
+                {translate(language, "새로운 기회나 협업에 열려 있습니다")}
               </h2>
               <a
                 href="mailto:bhk0827@gmail.com"

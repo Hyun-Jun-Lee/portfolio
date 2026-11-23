@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLanguage } from "./LanguageProvider";
+import { translate } from "../lib/i18n";
 
 const sections = [
   { id: "projects", label: "Projects" },
@@ -13,6 +15,7 @@ export function Navigation() {
   const [activeSection, setActiveSection] = useState("");
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { language, setLanguage } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +46,7 @@ export function Navigation() {
     >
       <div className="max-w-[1200px] mx-auto px-5 md:px-10 w-full flex items-center justify-between">
         <a href="#" className="text-base font-semibold text-white transition-colors duration-150 hover:text-silver">
-          이현준
+          {language === "ko" ? "이현준" : "Hyun Jun Lee"}
         </a>
         <div className="hidden md:flex items-center gap-1">
           {sections.map(({ id, label }) => (
@@ -61,14 +64,36 @@ export function Navigation() {
           ))}
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden rounded-lg p-2 text-silver transition-colors hover:text-white"
-          aria-label={mobileOpen ? "메뉴 닫기" : "메뉴 열기"}
-          aria-expanded={mobileOpen}
-          aria-controls="mobile-navigation"
-        >
+        <div className="flex items-center gap-2">
+          <div
+            className="inline-flex rounded-md border border-white/15 bg-surface p-0.5"
+            role="group"
+            aria-label={language === "ko" ? "언어 선택" : "Language selection"}
+          >
+            {(["ko", "en"] as const).map((option) => (
+              <button
+                key={option}
+                type="button"
+                onClick={() => setLanguage(option)}
+                className={`rounded-[4px] px-2 py-1 font-mono text-[11px] font-medium transition-colors duration-150 ${
+                  language === option
+                    ? "bg-green text-on-green"
+                    : "text-silver hover:text-white"
+                }`}
+                aria-pressed={language === option}
+              >
+                {option.toUpperCase()}
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden rounded-lg p-2 text-silver transition-colors hover:text-white"
+            aria-label={translate(language, mobileOpen ? "메뉴 닫기" : "메뉴 열기")}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation"
+          >
           {mobileOpen ? (
             <svg
               width="20"
@@ -92,7 +117,8 @@ export function Navigation() {
               <path d="M3 12h18M3 6h18M3 18h18" />
             </svg>
           )}
-        </button>
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -110,7 +136,7 @@ export function Navigation() {
                     : "text-silver hover:text-white"
                 }`}
               >
-                {label}
+              {label}
               </a>
             ))}
           </div>
