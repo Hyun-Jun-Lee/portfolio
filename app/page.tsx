@@ -227,9 +227,20 @@ const projects = [
 
 const experiences = [
   {
-    company: "삼성전자 DS",
+    company: "SK Hynix 프로젝트",
+    role: "AI Engineering, 비정형 담당",
+    period: "2026.09.01 ~ 2026.12.15",
+    description: "비정형 문서 Asset Context 생성 AI Agent",
+    highlights: [
+      "PDF·DOCX·PPTX의 원본 순서와 위치를 보존하는 문서 처리 파이프라인 설계·구현",
+      "업무 도메인 분류와 원문 근거 기반 검색 컨텍스트 생성 담당",
+      "Temporal 워커, 페이지 분할, 실패 구간 재시도로 처리 흐름 구성",
+    ],
+  },
+  {
+    company: "삼성전자 DS 프로젝트",
     role: "AI Engineering Consultant",
-    period: "2026.03 ~",
+    period: "2026.04.01 ~ 2026.07.31",
     description: "Manufacturing Execution System Team",
     highlights: [
       "삼성전자 DS MES 팀 멀티 에이전트 프로젝트 참여",
@@ -379,21 +390,32 @@ export default function Home() {
     <>
       {/* ═══ HERO ═══ */}
       <SectionFade>
-        <section className="flex items-center pt-16 md:min-h-[58dvh]">
-          <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 items-center gap-10 px-5 py-10 md:grid-cols-[minmax(0,1fr)_280px] md:gap-16 md:px-10">
+        <section className="pt-16">
+          <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-4 px-5 pb-10 pt-8 text-center md:px-10">
+            <div className="hero-portrait relative h-[230px] w-[220px] overflow-hidden rounded-t-xl sm:h-[260px] sm:w-[245px]">
+              <Image
+                src="/profile.jpg"
+                alt="이현준"
+                fill
+                sizes="(min-width: 640px) 245px, 220px"
+                preload
+                className="hero-portrait-fade object-cover object-top"
+              />
+            </div>
+
             <div className="reveal-on-load max-w-[560px]">
-                <h1 className="text-[clamp(40px,7vw,64px)] font-bold leading-[1.1] tracking-[-1px] text-white mb-2">
-                  이현준
-                </h1>
-                <p className="text-[clamp(20px,3vw,32px)] font-normal text-silver mb-7">
-                  Product Engineer
-                </p>
-                <p className="text-base text-silver leading-relaxed max-w-[48ch]">
-                  기능을 구현하는 것보다 문제를 해결하는 것에 관심이 있습니다. 여러
-                  아이디어를 직접 서비스로 만들고 운영해온 경험을 통해,
-                  좋은 코드보다 좋은 프로덕트를 만드는 엔지니어를 지향합니다.
-                </p>
-              <div className="mt-8 flex flex-wrap items-center gap-4">
+              <h1 className="mb-2 text-[clamp(40px,7vw,64px)] font-bold leading-[1.1] tracking-[-1px] text-white">
+                이현준
+              </h1>
+              <p className="mb-7 text-[clamp(20px,3vw,32px)] font-normal text-silver">
+                Product Engineer
+              </p>
+              <p className="max-w-[48ch] text-base leading-relaxed text-silver">
+                기능을 구현하는 것보다 문제를 해결하는 것에 관심이 있습니다. 여러
+                아이디어를 직접 서비스로 만들고 운영해온 경험을 통해,
+                좋은 코드보다 좋은 프로덕트를 만드는 엔지니어를 지향합니다.
+              </p>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <a
                   href="https://github.com/Hyun-Jun-Lee"
                   target="_blank"
@@ -404,19 +426,6 @@ export default function Home() {
                   GitHub
                 </a>
                 <CopyEmail email="bhk0827@gmail.com" />
-              </div>
-            </div>
-
-            <div className="hidden md:flex justify-end">
-              <div className="relative h-[340px] w-[280px] overflow-hidden rounded-2xl border border-white/10">
-                <Image
-                  src="/profile.jpg"
-                  alt="이현준"
-                  fill
-                  sizes="280px"
-                  preload
-                  className="object-cover"
-                />
               </div>
             </div>
           </div>
@@ -430,42 +439,52 @@ export default function Home() {
           <div className="max-w-[1200px] mx-auto px-5 md:px-10">
             <SectionHeader title="Projects" />
 
-            <div className="flex flex-col gap-4">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
               {projects.filter((project) => project.featured).map((project) => (
                 <article
                   key={project.name}
-                  className="grid grid-cols-1 gap-4 rounded-xl border border-white/10 bg-surface p-6 md:grid-cols-[160px_minmax(0,1fr)] md:gap-8 md:p-8"
+                  className="featured-project min-w-0"
                 >
-                  <div className="flex flex-wrap items-start gap-x-4 gap-y-1 md:flex-col md:gap-2">
-                    <span className="font-mono text-[13px] text-silver">{project.period}</span>
-                    <span className="text-sm text-silver">{project.role}</span>
-                  </div>
-                  <div>
-                    <h3 className="mb-2 text-xl font-semibold text-white">{project.name}</h3>
-                    <p className="mb-5 max-w-[76ch] text-sm leading-relaxed text-silver">
-                      {project.description}
-                    </p>
-                    <ProjectBody project={project} previewCount={3} />
+                  <div className="featured-project-card h-full rounded-xl border border-white/10 bg-surface p-6 md:p-8">
+                    <div className="mb-5 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                      <span className="font-mono text-[13px] text-silver">{project.period}</span>
+                      <span className="text-sm text-silver">{project.role}</span>
+                    </div>
+                    <div>
+                      <h3 className="mb-2 text-xl font-semibold text-white">{project.name}</h3>
+                      <p className="mb-5 max-w-[76ch] text-sm leading-relaxed text-silver">
+                        {project.description}
+                      </p>
+                      <ProjectBody project={project} previewCount={3} />
+                    </div>
                   </div>
                 </article>
               ))}
             </div>
 
-            <div className="mt-8 border-t border-white/10">
+            <div className="mt-10 flex items-baseline justify-between gap-4">
+              <h3 className="text-base font-semibold text-white">More Projects</h3>
+              <p className="text-xs text-silver">좌우로 스크롤해 더 보기</p>
+            </div>
+            <div
+              className="project-rail mt-4 flex snap-x snap-proximity items-start gap-4 overflow-x-auto pb-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
+              role="region"
+              aria-label="그 외 프로젝트, 가로로 스크롤"
+              tabIndex={0}
+            >
               {projects.filter((project) => !project.featured).map((project) => (
-                <details key={project.name} className="group border-b border-white/10">
-                  <summary className="grid cursor-pointer list-none grid-cols-1 gap-2 py-5 transition-colors duration-150 hover:bg-surface md:grid-cols-[160px_minmax(0,1fr)] md:gap-8 [&::-webkit-details-marker]:hidden">
+                <details
+                  key={project.name}
+                  className="group w-[82vw] max-w-[400px] shrink-0 snap-start rounded-xl border border-white/10 bg-surface sm:w-[360px] lg:w-[390px]"
+                >
+                  <summary className="flex min-h-[210px] cursor-pointer list-none flex-col p-6 focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-green [&::-webkit-details-marker]:hidden">
                     <span className="font-mono text-[13px] text-silver">{project.period}</span>
-                    <span className="flex flex-col gap-1 md:flex-row md:items-start md:justify-between md:gap-6">
-                      <span className="flex flex-col gap-1">
-                        <span className="text-base font-medium text-white">{project.name}</span>
-                        <span className="text-sm leading-relaxed text-silver">{project.description}</span>
-                      </span>
-                      <span className="shrink-0 text-sm text-silver group-open:hidden">자세히 보기</span>
-                      <span className="hidden shrink-0 text-sm text-silver group-open:inline">접기</span>
-                    </span>
+                    <span className="mt-5 text-lg font-medium text-white">{project.name}</span>
+                    <span className="mt-2 text-sm leading-relaxed text-silver">{project.description}</span>
+                    <span className="mt-auto pt-5 text-sm text-silver group-open:hidden">자세히 보기</span>
+                    <span className="mt-auto hidden pt-5 text-sm text-silver group-open:inline">접기</span>
                   </summary>
-                  <div className="pb-6 md:pl-48">
+                  <div className="border-t border-white/10 px-6 pb-6 pt-5">
                     <p className="mb-4 text-sm text-silver">{project.role}</p>
                     <ProjectBody project={project} />
                   </div>
