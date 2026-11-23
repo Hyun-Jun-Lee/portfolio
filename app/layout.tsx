@@ -26,14 +26,21 @@ export const metadata: Metadata = {
     siteName: "이현준 Portfolio",
     locale: "ko_KR",
     type: "website",
-    images: [{ url: "/profile.jpg", width: 630, height: 630, alt: "이현준" }],
+    images: [
+      {
+        url: "/profile-hero.jpeg",
+        width: 4032,
+        height: 3024,
+        alt: "이현준",
+      },
+    ],
   },
   twitter: {
     card: "summary",
     title: "이현준 | Product Engineer",
     description:
       "기획부터 배포까지, LLM 기반 프로덕트를 직접 설계하고 운영하는 Product Engineer입니다.",
-    images: ["/profile.jpg"],
+    images: ["/profile-hero.jpeg"],
   },
   robots: { index: true, follow: true },
 };

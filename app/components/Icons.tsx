@@ -3,6 +3,7 @@
 export {
   GithubLogo,
   EnvelopeSimple,
+  Check,
   ArrowUpRight,
   Terminal,
   MapPin,

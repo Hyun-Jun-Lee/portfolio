@@ -2,6 +2,7 @@ import Image from "next/image";
 import { SectionFade } from "./components/SectionFade";
 import { GithubLogo, ArrowUpRight } from "./components/Icons";
 import { CopyEmail } from "./components/CopyEmail";
+import { MoreProjectCard } from "./components/MoreProjectCard";
 
 const projects = [
   {
@@ -271,12 +272,6 @@ const experiences = [
   },
 ];
 
-const certificates = [
-  { year: "2020", name: "정보처리기사" },
-  { year: "2019", name: "ADsP (데이터분석준전문가)" },
-  { year: "2017", name: "AFPK (재무설계사)" },
-];
-
 const skills = [
   {
     label: "Core",
@@ -305,7 +300,7 @@ const skills = [
 
 function SectionHeader({ title }: { title: string }) {
   return (
-    <h2 className="mb-6 text-2xl font-semibold text-white">{title}</h2>
+    <h2 className="mb-6 text-2xl font-medium text-white">{title}</h2>
   );
 }
 
@@ -329,9 +324,11 @@ function ProjectHighlights({ highlights }: { highlights: string[] }) {
 function ProjectBody({
   project,
   previewCount,
+  showLinks = true,
 }: {
   project: Project;
   previewCount?: number;
+  showLinks?: boolean;
 }) {
   const visibleHighlights = previewCount
     ? project.highlights.slice(0, previewCount)
@@ -357,7 +354,7 @@ function ProjectBody({
       <p className="mt-5 max-w-[76ch] text-[13px] leading-relaxed text-silver">
         {project.keywords.join(" · ")}
       </p>
-      {(project.website || project.github) && (
+      {showLinks && (project.website || project.github) && (
         <div className="mt-5 flex gap-5">
           {project.website && (
             <a
@@ -391,41 +388,41 @@ export default function Home() {
       {/* ═══ HERO ═══ */}
       <SectionFade>
         <section className="pt-16">
-          <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-4 px-5 pb-10 pt-8 text-center md:px-10">
-            <div className="hero-portrait relative h-[230px] w-[220px] overflow-hidden rounded-t-xl sm:h-[260px] sm:w-[245px]">
+          <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-8 px-5 py-16 text-center md:grid md:grid-cols-[minmax(0,1fr)_320px] md:items-center md:gap-x-20 md:px-10 md:py-24 md:text-left">
+            <div className="hero-portrait relative h-[270px] w-[260px] overflow-hidden rounded-t-xl sm:h-[290px] sm:w-[280px] md:order-2 md:h-[330px] md:w-[320px] md:justify-self-end">
               <Image
-                src="/profile.jpg"
+                src="/profile-hero.jpeg"
                 alt="이현준"
                 fill
-                sizes="(min-width: 640px) 245px, 220px"
+                sizes="(min-width: 768px) 320px, (min-width: 640px) 280px, 260px"
                 preload
-                className="hero-portrait-fade object-cover object-top"
+                className="hero-portrait-fade object-cover object-center"
               />
             </div>
 
-            <div className="reveal-on-load max-w-[560px]">
-              <h1 className="mb-2 text-[clamp(40px,7vw,64px)] font-bold leading-[1.1] tracking-[-1px] text-white">
+            <div className="reveal-on-load max-w-[560px] md:order-1">
+              <h1 className="mb-3 text-[clamp(40px,7vw,64px)] font-medium leading-[1.05] tracking-[-0.02em] text-white">
                 이현준
               </h1>
-              <p className="mb-7 text-[clamp(20px,3vw,32px)] font-normal text-silver">
+              <p className="mb-6 text-[clamp(20px,3vw,32px)] font-normal text-silver">
                 Product Engineer
               </p>
-              <p className="max-w-[48ch] text-base leading-relaxed text-silver">
+              <p className="max-w-[52ch] text-base leading-relaxed text-silver">
                 기능을 구현하는 것보다 문제를 해결하는 것에 관심이 있습니다. 여러
                 아이디어를 직접 서비스로 만들고 운영해온 경험을 통해,
                 좋은 코드보다 좋은 프로덕트를 만드는 엔지니어를 지향합니다.
               </p>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-4 md:justify-start">
+                <CopyEmail email="bhk0827@gmail.com" />
                 <a
                   href="https://github.com/Hyun-Jun-Lee"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-11 items-center gap-2 rounded-lg bg-green px-6 text-sm font-semibold text-on-green transition-colors duration-150 hover:bg-green-active"
+                  className="inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 bg-surface px-6 text-sm font-medium text-white transition-[background-color,border-color,transform] duration-150 hover:border-white/25 hover:bg-surface-mid active:scale-[0.98]"
                 >
                   <GithubLogo size={16} weight="regular" />
                   GitHub
                 </a>
-                <CopyEmail email="bhk0827@gmail.com" />
               </div>
             </div>
           </div>
@@ -439,7 +436,7 @@ export default function Home() {
           <div className="max-w-[1200px] mx-auto px-5 md:px-10">
             <SectionHeader title="Projects" />
 
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4">
               {projects.filter((project) => project.featured).map((project) => (
                 <article
                   key={project.name}
@@ -462,7 +459,7 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="mt-10 flex items-baseline justify-between gap-4">
+            <div className="mt-12 flex items-baseline justify-between gap-4">
               <h3 className="text-base font-semibold text-white">More Projects</h3>
               <p className="text-xs text-silver">좌우로 스크롤해 더 보기</p>
             </div>
@@ -473,22 +470,65 @@ export default function Home() {
               tabIndex={0}
             >
               {projects.filter((project) => !project.featured).map((project) => (
-                <details
-                  key={project.name}
-                  className="group w-[82vw] max-w-[400px] shrink-0 snap-start rounded-xl border border-white/10 bg-surface sm:w-[360px] lg:w-[390px]"
+                <MoreProjectCard key={project.name} project={project}>
+                  <p className="mb-4 text-sm text-silver">{project.role}</p>
+                  <ProjectBody project={project} showLinks={false} />
+                </MoreProjectCard>
+              ))}
+            </div>
+          </div>
+        </section>
+      </SectionFade>
+
+      {/* ═══ EXPERIENCE ═══ */}
+      <SectionFade>
+        <section id="experience" className="scroll-mt-16 py-12">
+          <div className="max-w-[1200px] mx-auto px-5 md:px-10">
+            <SectionHeader title="Experience" />
+
+            <div className="mt-2" role="list">
+              {experiences.map((exp, index) => (
+                <article
+                  key={exp.company}
+                  className="grid grid-cols-[20px_minmax(0,1fr)] gap-x-4 pb-10 last:pb-0 md:grid-cols-[132px_20px_minmax(0,1fr)] md:gap-x-6"
+                  role="listitem"
                 >
-                  <summary className="flex min-h-[210px] cursor-pointer list-none flex-col p-6 focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-green [&::-webkit-details-marker]:hidden">
-                    <span className="font-mono text-[13px] text-silver">{project.period}</span>
-                    <span className="mt-5 text-lg font-medium text-white">{project.name}</span>
-                    <span className="mt-2 text-sm leading-relaxed text-silver">{project.description}</span>
-                    <span className="mt-auto pt-5 text-sm text-silver group-open:hidden">자세히 보기</span>
-                    <span className="mt-auto hidden pt-5 text-sm text-silver group-open:inline">접기</span>
-                  </summary>
-                  <div className="border-t border-white/10 px-6 pb-6 pt-5">
-                    <p className="mb-4 text-sm text-silver">{project.role}</p>
-                    <ProjectBody project={project} />
+                  <time className="hidden font-mono text-[13px] leading-5 text-silver md:col-start-1 md:row-start-1 md:block">
+                    {exp.period}
+                  </time>
+
+                  <div
+                    className="relative col-start-1 row-start-1 h-full md:col-start-2"
+                    aria-hidden="true"
+                  >
+                    {index < experiences.length - 1 && (
+                      <span className="absolute left-1/2 top-5 bottom-0 w-px -translate-x-1/2 bg-border-gray" />
+                    )}
+                    <span
+                      className={`absolute left-1/2 top-1.5 h-3 w-3 -translate-x-1/2 rounded-full border-2 ${
+                        index === 0
+                          ? "border-green bg-green"
+                          : "border-silver bg-near-black"
+                      }`}
+                    />
                   </div>
-                </details>
+
+                  <div className="col-start-2 row-start-1 md:col-start-3">
+                    <time className="mb-2 block font-mono text-[13px] leading-5 text-silver md:hidden">
+                      {exp.period}
+                    </time>
+                    <h3 className="text-lg font-medium leading-6 text-white">
+                      {exp.company}
+                    </h3>
+                    <span className="mt-1 block text-sm text-near-white">
+                      {exp.role}
+                    </span>
+                    <p className="mb-4 mt-1 text-[13px] leading-5 text-silver">
+                      {exp.description}
+                    </p>
+                    <ProjectHighlights highlights={exp.highlights} />
+                  </div>
+                </article>
               ))}
             </div>
           </div>
@@ -518,85 +558,12 @@ export default function Home() {
         </section>
       </SectionFade>
 
-      {/* ═══ EXPERIENCE ═══ */}
-      <SectionFade>
-        <section id="experience" className="scroll-mt-16 py-12">
-          <div className="max-w-[1200px] mx-auto px-5 md:px-10">
-            <SectionHeader title="Experience" />
-
-            <div className="flex flex-col">
-              {experiences.map((exp, index) => (
-                <div
-                  key={exp.company}
-                  className={`grid grid-cols-1 md:grid-cols-[160px_1fr] gap-2 md:gap-10 py-5 border-b border-border-gray${
-                    index === 0 ? " border-t" : ""
-                  }`}
-                >
-                  <div>
-                    <span className="font-mono text-[13px] text-silver">
-                      {exp.period}
-                    </span>
-                  </div>
-
-                  <div>
-                    <h3 className="text-base font-bold text-white mb-1">
-                      {exp.company}
-                    </h3>
-                    <span className="text-sm font-medium text-near-white">
-                      {exp.role}
-                    </span>
-                    <p className="text-xs text-silver mt-1 mb-2.5">
-                      {exp.description}
-                    </p>
-                    <ul className="flex flex-col gap-1">
-                      {exp.highlights.map((highlight, i) => (
-                        <li
-                          key={i}
-                          className="text-sm text-near-white leading-normal pl-3.5 relative"
-                        >
-                          <span className="absolute left-0 text-silver">
-                            &#8250;
-                          </span>
-                          {highlight}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      </SectionFade>
-
-      {/* ═══ CERTIFICATES ═══ */}
-      <SectionFade>
-        <section id="certificates" className="scroll-mt-16 py-12">
-          <div className="max-w-[1200px] mx-auto px-5 md:px-10">
-            <SectionHeader title="Certificate" />
-
-            <div className="flex flex-wrap gap-x-8 gap-y-3 border-t border-white/10 pt-5">
-              {certificates.map((cert) => (
-                <div key={cert.name} className="inline-flex items-center gap-2">
-                  <span className="font-mono text-[13px] text-silver">
-                    {cert.year}
-                  </span>
-                  <span className="text-sm text-near-white">
-                    {cert.name}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      </SectionFade>
-
       {/* ═══ CTA BAND ═══ */}
       <SectionFade>
         <section id="contact" className="scroll-mt-16 py-12">
           <div className="max-w-[1200px] mx-auto px-5 md:px-10">
             <div className="bg-surface rounded-xl border border-white/10 px-8 py-10 md:px-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-              <h2 className="text-2xl font-bold text-white max-w-[480px]">
+              <h2 className="max-w-[480px] text-2xl font-medium text-white">
                 새로운 기회나 협업에 열려 있습니다
               </h2>
               <a
